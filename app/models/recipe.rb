@@ -1,7 +1,7 @@
 class Recipe < ApplicationRecord
 
-  belongs_to :users
-  belongs_to :sources
+  belongs_to :user
+  belongs_to :source
   has_many :ingredients
 
   validates :name, length: { minimum: 3 }

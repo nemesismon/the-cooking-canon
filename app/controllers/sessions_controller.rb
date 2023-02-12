@@ -1,14 +1,15 @@
 class SessionsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found
   
   before_action :find_user, only: [:show, :destroy]
 
   def create
-    user = User.find_by(username: params[:username])
-    if user&.authenticate(params: [:password])
+    user = User.find_by!(username: params[:username])
+    if user&.authenticate(params[:password])
       session[:user_id] = user.id 
       render json: user, status: :ok
     else
-      render json: {error: "Unauthorized"}, status: :unauthorized
+      render json: { error: 'Unauthorized'}, status: :unauthorized
     end
   end
 
@@ -22,7 +23,11 @@ class SessionsController < ApplicationController
   private
 
   def find_user
-    @user = User.find_by(id: session[:use_id])
+    @user = User.find_by!(id: session[:use_id])
+  end
+
+  def render_record_not_found
+    render json: { error: 'Unauthorized'}, status: :unauthorized
   end
 
 end

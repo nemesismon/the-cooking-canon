@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   resources :sources
   resources :recipes
   resources :users
-  resources :sessions
 
+  get '/me', to: 'sessions#show'
+  post '/login', to: 'sessions#create'
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
