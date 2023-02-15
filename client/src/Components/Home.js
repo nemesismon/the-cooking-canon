@@ -3,16 +3,15 @@ import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
 import Card from 'react-bootstrap/Card'
-import { userLogin, createUser } from "./User/userSlice";
+import Container from "react-bootstrap/Container";
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
+import { userLogin, createUser, userLogout } from "./User/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function Home() {
-
-  const state = useSelector(state => state)
-  console.log(state)
-
+ 
   const [login, setLogin] = useState(true)
-  const [loginStatus, setLoginStatus] = useState(false)
   const [username, setUsername] = useState('')
   const [createUsername, setCreateUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -21,39 +20,53 @@ function Home() {
   const [phone, setPhone] = useState('')
   const [birthday, setBirthday] = useState({})
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
-  const [errors, setErrors] = useState('')
 
   const dispatch = useDispatch()
+  const state = useSelector(state => state.user)
+  const errors = useSelector(state => state.user.errors)
+  const loginStatus = useSelector(state => state.user.loginStatus)
 
-  const handleFormToggle = (e) => {
+  console.log(state)
+  console.log(errors)
+  console.log(loginStatus)
+
+  const handleFormToggle = () => {
+    debugger
     setLogin(!login)
   }
 
   const handleCreateUser = async (e) => {
     e.preventDefault()
-    console.log(e)
   }
 
   const handleUserLogin = async (e) => {
     e.preventDefault()
       try {
         setAddRequestStatus('pending')
-        const promiseResult = await dispatch(userLogin({username, password})).unwrap()
-      } catch (err) {
-        setErrors(err)
-      } finally {
-        setLoginStatus(true)
-        setAddRequestStatus('idle')
-        setUsername('')
-        setPassword('')
-      }
+        await dispatch(userLogin({username, password})).unwrap()
+        } catch (err) {
+        } finally {
+          setAddRequestStatus('idle')
+          setUsername('')
+          setPassword('')  
+        }
   }
 
-  console.log(errors)
+  const handleLogout = async (e) => {
+    e.preventDefault()
+    try {
+      setAddRequestStatus('pending')
+      dispatch(userLogout())
+    } catch (err) {
+    } finally {
+      setAddRequestStatus('idle')
+    }
+}
 
-  // Change to ternary and switch between Login and User components?
   const forms = () => {
-  if (loginStatus === false) {
+    // debugger
+  if (loginStatus === false
+    ) {
     if (login === true) {
       return ( 
         <div>
@@ -79,12 +92,11 @@ function Home() {
     } else {
     return (
       <div>
-        onSubmit here with call reference
         <Form onSubmit={handleCreateUser}>
         <Form.Group>
           <br></br>
           <FloatingLabel label="Username">
-            <Form.Control type="text" placeholder="Username" value={createUsername} onChange={setCreateUsername(e => e.target.value)} />
+            <Form.Control type="text" placeholder="Username" />
           </FloatingLabel>
           <br></br>
           <FloatingLabel label="Password">
@@ -118,7 +130,12 @@ function Home() {
   } else {
     return (
       <div>
-        {/* <Button>Logout, `${state.user}`</Button> */}
+        <Button onClick={handleLogout}>Logout {state.user.username}</Button>
+        <br></br>
+        <br></br>
+        <Container>
+        <Row>
+        <Col md={{ span: 1, offset: 2 }}>
         <Card style={{ width: '18rem'}}>
           {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
           <Card.Body>
@@ -128,7 +145,8 @@ function Home() {
             </Card.Text>
           </Card.Body>
         </Card>
-        <br></br>
+        </Col>
+        <Col md={{ span: 0, offset: 4 }}>
         <Card style={{ width: '18rem'}}>
           {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
           <Card.Body>
@@ -138,7 +156,11 @@ function Home() {
             </Card.Text>
           </Card.Body>
         </Card>
+        </Col>
+        </Row>
         <br></br>
+        <Row>
+        <Col md={{ span: 1, offset: 2 }}>
         <Card style={{ width: '18rem'}}>
           {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
           <Card.Body>
@@ -148,7 +170,8 @@ function Home() {
             </Card.Text>
           </Card.Body>
         </Card>
-        <br></br>
+        </Col>
+        <Col md={{ span: 0, offset: 4 }}>
         <Card style={{ width: '18rem'}}>
           {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
           <Card.Body>
@@ -158,6 +181,9 @@ function Home() {
             </Card.Text>
           </Card.Body>
         </Card>
+        </Col>
+        </Row>
+        </Container>
       </div>
     )
   }
@@ -165,7 +191,7 @@ function Home() {
 
   return (
     <>
-      <h3>Welcome to The Cooking Canon!</h3>
+      <h3>Welcome</h3>
       <div>{forms()}</div>
       <br></br>
     </>

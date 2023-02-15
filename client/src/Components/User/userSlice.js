@@ -1,41 +1,67 @@
-import { bindActionCreators, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import http from '../client'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
   return fetch('/me') 
-  .then(r => r.json())
-  .then(data => data)
+  // .then(r => r.json())
+  // .then(data => data)
 })
 
 export const userLogin = createAsyncThunk(
-  'user/userLogin', 
+  'user/userLogin',
     async initialPost => {
-      const response = await http.post('/login', initialPost, { headers: {'Content-type': 'application/json'}})
-        console.log(response.data)
-        return response.data
-    })
+      const response = await fetch('/login', {
+        method: 'POST',
+        body: JSON.stringify(initialPost),
+        headers: {'Content-type': 'application/json'},
+      })
+      return response.json()
+    }
+)
 
-export const createUser = (e) => {
-  e.preventDefault()
-  console.log(e)
+export const createUser = () => {
   // createAsyncThunk('user/createUser')
 }
 
+export const userLogout = createAsyncThunk(
+  'user/userLogout', () => {
+      fetch('/logout', {
+        method: 'DELETE',
+      })
+})
+
 const userSlice = createSlice({
   name: 'user',
-  initialState: {},
-  errors: null,
+  initialState: {
+    user: {},
+    errors: [],
+    loginStatus: false
+  },
   reducers: {},
   extraReducers(builder) {
     builder.addCase(userLogin.fulfilled, (state, action) => {
+      // console.log(action)
       // debugger
-      state.user.push(action.payload)
+      if (action.payload.id !== undefined && action.payload.error !== 'Unauthorized') {
+        state.errors = []
+        state.loginStatus = true
+        state.user = action.payload
+      } else {
+        state.errors.push(action.payload)
+      }
     })
     builder.addCase(userLogin.rejected, (state, action) => {
-      console.log(action)
-      // debugger
+      console.log('login rejected')
       // action.payload
-      state.errors.push(action.error.push(action.message))
+      // return {...initialState}
+    })
+    builder.addCase(userLogout.fulfilled, (state, action) => {
+      // debugger
+      state.loginStatus = false
+      state.user = {}
+      state.errors = []
+    })
+    builder.addCase(userLogout.rejected, (state, action) => {
+      // debugger
     })
   }
 })

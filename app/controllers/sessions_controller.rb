@@ -6,7 +6,8 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by!(username: params[:username])
     if user&.authenticate(params[:password])
-      session[:user_id] = user.id 
+      session[:user_id] = user.id
+      # byebug
       render json: user, status: :ok
     else
       render json: { error: 'Unauthorized'}, status: :unauthorized
@@ -18,12 +19,14 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    session.destroy
+    head :no_content
   end
 
   private
 
   def find_user
-    @user = User.find_by!(id: session[:use_id])
+    @user = User.find_by!(id: session[:user_id])
   end
 
   def render_record_not_found
