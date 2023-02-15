@@ -15,12 +15,12 @@ class SessionsController < ApplicationController
   end
 
   def show
-    render json: user, status: :ok
+    render json: @user, status: :ok
   end
 
   def destroy
     session.destroy
-    head :no_content
+    render json: {message: 'sessTerm'}, status: :ok
   end
 
   private

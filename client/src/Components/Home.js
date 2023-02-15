@@ -6,20 +6,19 @@ import Card from 'react-bootstrap/Card'
 import Container from "react-bootstrap/Container";
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import { userLogin, createUser, userLogout } from "./User/userSlice";
+import { createUser, fetchUser, userLogin, userLogout } from "./User/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function Home() {
  
   const [login, setLogin] = useState(true)
+  const [fetchRun, setFetchRun] = useState(false)
   const [username, setUsername] = useState('')
-  const [createUsername, setCreateUsername] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [birthday, setBirthday] = useState({})
-  const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   const dispatch = useDispatch()
   const state = useSelector(state => state.user)
@@ -31,22 +30,25 @@ function Home() {
   console.log(loginStatus)
 
   const handleFormToggle = () => {
-    debugger
     setLogin(!login)
   }
 
   const handleCreateUser = async (e) => {
     e.preventDefault()
+    try {
+      await dispatch(createUser({username, password, passwordConfirmation, email, phone, birthday})).unwrap()
+    } catch(err) {
+    } finally {
+      setUsername('')
+    }
   }
 
   const handleUserLogin = async (e) => {
     e.preventDefault()
       try {
-        setAddRequestStatus('pending')
         await dispatch(userLogin({username, password})).unwrap()
         } catch (err) {
         } finally {
-          setAddRequestStatus('idle')
           setUsername('')
           setPassword('')  
         }
@@ -55,19 +57,22 @@ function Home() {
   const handleLogout = async (e) => {
     e.preventDefault()
     try {
-      setAddRequestStatus('pending')
       dispatch(userLogout())
     } catch (err) {
     } finally {
-      setAddRequestStatus('idle')
     }
 }
-
+  
   const forms = () => {
-    // debugger
+    if (loginStatus === false && fetchRun === false) {
+        dispatch(fetchUser())
+        setFetchRun(true)
+    }
+
   if (loginStatus === false
     ) {
     if (login === true) {
+      // debugger
       return ( 
         <div>
             <br></br>
@@ -81,8 +86,8 @@ function Home() {
                 <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
               </FloatingLabel>
               <br></br>
-              <Button variant="primary" type="submit">Submit</Button> &ensp;
-              <Button variant="primary" onClick={handleFormToggle}>Create Account</Button>
+              <Button variant="primary" onClick={handleFormToggle}>Create Account</Button> &ensp;
+              <Button variant="primary" type="submit">Submit</Button>
             </Form.Group>
             </Form>
             <br></br>
@@ -96,31 +101,31 @@ function Home() {
         <Form.Group>
           <br></br>
           <FloatingLabel label="Username">
-            <Form.Control type="text" placeholder="Username" />
+            <Form.Control type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
           </FloatingLabel>
           <br></br>
           <FloatingLabel label="Password">
-            <Form.Control type="password" placeholder="Password" value={password} onChange={setPassword(e => e.target.value)} />
+            <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
           </FloatingLabel>
           <br></br>
-          <FloatingLabel label="Password Confirmation" value={passwordConfirmation} onChange={setPasswordConfirmation(e => e.target.value)} >
+          <FloatingLabel label="Password Confirmation" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} >
             <Form.Control type="password" placeholder="Password Confirmation" />
           </FloatingLabel>
           <br></br>
           <FloatingLabel label="Email">
-            <Form.Control type="email" placeholder="Email" value={email} onChange={setEmail(e => e.target.value)}/>
+            <Form.Control type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
           </FloatingLabel>
           <br></br>
           <FloatingLabel label="Phone Number">
-            <Form.Control type="text" placeholder="Phone Number" value={phone} onChange={setPhone(e => e.target.value)}/>
+            <Form.Control type="text" placeholder="Phone Number" value={phone} onChange={e => setPhone(e.target.value)}/>
           </FloatingLabel>
           <br></br>
           <FloatingLabel label="Birthday">
-            <Form.Control type="date" value={birthday} onChange={setBirthday(e => e.target.value)} />
+            <Form.Control type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
           </FloatingLabel>
           <br></br>
-          <Button variant="primary" type="submit">Submit</Button> &ensp;
-          <Button variant="primary" onClick={handleFormToggle}>Login</Button>
+          <Button variant="primary" onClick={handleFormToggle}>Login</Button> &ensp;
+          <Button variant="primary" type="submit">Submit</Button>
         </Form.Group>
         </Form>
         <br></br>
@@ -188,10 +193,19 @@ function Home() {
     )
   }
 }
+const formError = () => {
+  // debugger
+  if (errors.length > 0) {
+    return (
+      errors.forEach(error => { return (<li key={error}>{error}</li>)})
+    )
+  }
+}
 
   return (
     <>
       <h3>Welcome</h3>
+      <div>{formError()}</div>
       <div>{forms()}</div>
       <br></br>
     </>
