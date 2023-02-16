@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :ingredients
   resources :sources
   resources :recipes
-  resources :users
+  resources :users, only: [:create, :show]
 
   get '/me', to: 'sessions#show'
   post '/login', to: 'sessions#create'

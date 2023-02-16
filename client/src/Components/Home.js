@@ -6,8 +6,9 @@ import Card from 'react-bootstrap/Card'
 import Container from "react-bootstrap/Container";
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import { createUser, fetchUser, userLogin, userLogout } from "./User/userSlice";
+import { createUser, fetchUser, userLogin, userLogout, clearErrors } from "./User/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import '../index.css'
 
 function Home() {
  
@@ -15,7 +16,7 @@ function Home() {
   const [fetchRun, setFetchRun] = useState(false)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const [password_confirmation, setPasswordConfirmation] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [birthday, setBirthday] = useState({})
@@ -30,14 +31,17 @@ function Home() {
   console.log(loginStatus)
 
   const handleFormToggle = () => {
+    dispatch(clearErrors())
     setLogin(!login)
+    // debugger
   }
 
   const handleCreateUser = async (e) => {
     e.preventDefault()
     try {
-      await dispatch(createUser({username, password, passwordConfirmation, email, phone, birthday})).unwrap()
+      await dispatch(createUser({username, password, password_confirmation, email, phone, birthday})).unwrap()
     } catch(err) {
+      // console.log(err)
     } finally {
       setUsername('')
     }
@@ -48,6 +52,7 @@ function Home() {
       try {
         await dispatch(userLogin({username, password})).unwrap()
         } catch (err) {
+          // console.log(err)
         } finally {
           setUsername('')
           setPassword('')  
@@ -57,15 +62,16 @@ function Home() {
   const handleLogout = async (e) => {
     e.preventDefault()
     try {
-      dispatch(userLogout())
+      dispatch(userLogout()).unwrap()
     } catch (err) {
+      // console.log(err)
     } finally {
     }
 }
   
   const forms = () => {
     if (loginStatus === false && fetchRun === false) {
-        dispatch(fetchUser())
+        dispatch(fetchUser()).unwrap()
         setFetchRun(true)
     }
 
@@ -73,9 +79,11 @@ function Home() {
     ) {
     if (login === true) {
       // debugger
+      const loginError = errors.length > 0 ? <p className="make_red">{errors[0].message}</p> : null
       return ( 
         <div>
             <br></br>
+            {loginError}
             <Form onSubmit={handleUserLogin}>
             <Form.Group>
               <FloatingLabel label="Username">
@@ -95,8 +103,14 @@ function Home() {
         </div> 
       )
     } else {
+      // debugger
+    const createErrors = errors.length > 0 ? <div className="make_red">{
+      errors.map((error) => {
+      return ( <li key={error.id}>{error}</li>
+      )})}</div> : null
     return (
       <div>
+        {createErrors}
         <Form onSubmit={handleCreateUser}>
         <Form.Group>
           <br></br>
@@ -108,7 +122,7 @@ function Home() {
             <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
           </FloatingLabel>
           <br></br>
-          <FloatingLabel label="Password Confirmation" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} >
+          <FloatingLabel label="Password Confirmation" value={password_confirmation} onChange={e => setPasswordConfirmation(e.target.value)} >
             <Form.Control type="password" placeholder="Password Confirmation" />
           </FloatingLabel>
           <br></br>
@@ -193,19 +207,11 @@ function Home() {
     )
   }
 }
-const formError = () => {
-  // debugger
-  if (errors.length > 0) {
-    return (
-      errors.forEach(error => { return (<li key={error}>{error}</li>)})
-    )
-  }
-}
 
   return (
     <>
       <h3>Welcome</h3>
-      <div>{formError()}</div>
+      {/* <div>{formError()}</div> */}
       <div>{forms()}</div>
       <br></br>
     </>

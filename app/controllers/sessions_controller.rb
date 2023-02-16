@@ -7,7 +7,6 @@ class SessionsController < ApplicationController
     user = User.find_by!(username: params[:username])
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
-      # byebug
       render json: user, status: :ok
     else
       render json: { error: 'Unauthorized'}, status: :unauthorized
