@@ -74,16 +74,17 @@ const userSlice = createSlice({
       state.user = action.payload
     })
     builder.addCase(createUser.rejected, (state, action) => {
-      // debugger
+      state.errors = []
       const tempString = action.error.message
       const tempArray = tempString.split(',')
-      state.errors.push(tempArray)
+      state.errors = tempArray
     })
     builder.addCase(userLogin.fulfilled, (state, action) => {
       state.loginStatus = true
       state.user = action.payload
     })
     builder.addCase(userLogin.rejected, (state, action) => {
+      state.errors = []
       state.errors.push(action.error)
     })
     builder.addCase(fetchUser.fulfilled, (state, action) => {

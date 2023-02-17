@@ -13,6 +13,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <>The Cooking Canon</>
+        <img src='src/TCCHorizLogo.png'/>
       </header>
       <div>
         <NavBar />

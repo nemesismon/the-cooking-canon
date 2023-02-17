@@ -8,6 +8,7 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import { createUser, fetchUser, userLogin, userLogout, clearErrors } from "./User/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom'
 import '../index.css'
 
 function Home() {
@@ -26,9 +27,11 @@ function Home() {
   const errors = useSelector(state => state.user.errors)
   const loginStatus = useSelector(state => state.user.loginStatus)
 
-  console.log(state)
-  console.log(errors)
-  console.log(loginStatus)
+  // console.log(state)
+  // console.log(errors)
+  // console.log(loginStatus)
+
+  const navigate = useNavigate()
 
   const handleFormToggle = () => {
     dispatch(clearErrors())
@@ -43,7 +46,6 @@ function Home() {
     } catch(err) {
       // console.log(err)
     } finally {
-      setUsername('')
     }
   }
 
@@ -104,10 +106,10 @@ function Home() {
       )
     } else {
       // debugger
-    const createErrors = errors.length > 0 ? <div className="make_red">{
+    const createErrors = errors.length > 0 ? <p className="make_red">{
       errors.map((error) => {
-      return ( <li key={error.id}>{error}</li>
-      )})}</div> : null
+        return <li key={error}>{error}</li>
+      })}</p> : null
     return (
       <div>
         {createErrors}
@@ -149,13 +151,12 @@ function Home() {
   } else {
     return (
       <div>
-        <Button onClick={handleLogout}>Logout {state.user.username}</Button>
         <br></br>
         <br></br>
         <Container>
         <Row>
         <Col md={{ span: 1, offset: 2 }}>
-        <Card style={{ width: '18rem'}}>
+        <Card style={{ width: '18rem'}} onClick={() => navigate('/recipe_list')}>
           {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
           <Card.Body>
             <Card.Title>Recipes</Card.Title>
@@ -166,7 +167,7 @@ function Home() {
         </Card>
         </Col>
         <Col md={{ span: 0, offset: 4 }}>
-        <Card style={{ width: '18rem'}}>
+        <Card style={{ width: '18rem'}} onClic={() => navigate('/recipe_form')}>
           {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
           <Card.Body>
             <Card.Title>Create Recipe</Card.Title>
@@ -180,7 +181,7 @@ function Home() {
         <br></br>
         <Row>
         <Col md={{ span: 1, offset: 2 }}>
-        <Card style={{ width: '18rem'}}>
+        <Card style={{ width: '18rem'}} onClick={() => navigate('/source')}>
           {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
           <Card.Body>
             <Card.Title>Sources</Card.Title>
@@ -190,7 +191,7 @@ function Home() {
           </Card.Body>
         </Card>
         </Col>
-        <Col md={{ span: 0, offset: 4 }}>
+        <Col md={{ span: 0, offset: 4 }} onClick={() => navigate('/source_form')}>
         <Card style={{ width: '18rem'}}>
           {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
           <Card.Body>
@@ -203,6 +204,11 @@ function Home() {
         </Col>
         </Row>
         </Container>
+        <br></br>
+        <br></br>
+        <br></br>
+        {/* <br></br> */}
+        <Button onClick={handleLogout}>Logout {state.user.username}</Button>
       </div>
     )
   }
@@ -210,8 +216,8 @@ function Home() {
 
   return (
     <>
+      <br></br>
       <h3>Welcome</h3>
-      {/* <div>{formError()}</div> */}
       <div>{forms()}</div>
       <br></br>
     </>
