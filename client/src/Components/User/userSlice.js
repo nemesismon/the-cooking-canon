@@ -94,7 +94,7 @@ const userSlice = createSlice({
     builder.addCase(fetchUser.rejected, (state, action) => {
       // console.log(action.error)
     })
-    builder.addCase(userLogout.fulfilled, (state, action) => {
+    builder.addCase(userLogout.fulfilled, (state) => {
       state.loginStatus = false
       state.user = {}
       state.errors = []
