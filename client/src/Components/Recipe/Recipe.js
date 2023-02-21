@@ -1,27 +1,30 @@
 import React, { useState } from "react";
 import Card from 'react-bootstrap/Card'
-import { useDispatch, useSelector } from "react-redux";
-import { fetchUser } from "../User/userSlice";
+import { useSelector } from "react-redux";
+import FullRecipe from "./FullRecipe";
 
 function Recipe() {
 
-  const handleFullRecipe = () => {    
+  const handleFullRecipe = (recipe) => {
+    return (
+      <FullRecipe />
+    )
   }
 
   const user = useSelector(state => state.user.user)
   console.log(user)
 
     const recipeLister =       
-      JSON.stringify(user) !== '{}' ?
+      JSON.stringify(user) !== '{}' && user.recipes.length > 0 ?
         <p>{user.recipes.map((recipe) => {
           return (
-            <div >
-                <Card style={{ width: '75rem' }} key={recipe.id} onClick={() => handleFullRecipe()}>
+            <div>
+                <Card style={{ width: '75rem' }} key={recipe.id} onClick={() => handleFullRecipe(recipe)}>
                 {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
                 <Card.Body>
                   <Card.Title>{recipe.name}</Card.Title>
                   <Card.Text>
-                    Good For: {recipe.good_for},   Diet: {recipe.diet_type}
+                    Good For: {recipe.good_for}, &ensp; Diet: {recipe.diet_type}
                   </Card.Text>
                 </Card.Body>
               </Card>

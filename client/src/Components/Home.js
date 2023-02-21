@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card'
 import Container from "react-bootstrap/Container";
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import { createUser, fetchUser, userLogin, userLogout, clearErrors } from "./User/userSlice";
+import { createUser, userLogin, userLogout, clearErrors } from "./User/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom'
 import '../index.css'
@@ -36,7 +36,6 @@ function Home() {
   const handleFormToggle = () => {
     dispatch(clearErrors())
     setLogin(!login)
-    // debugger
   }
 
   const handleCreateUser = async (e) => {

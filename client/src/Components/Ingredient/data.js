@@ -1,0 +1,16 @@
+export const kitchenMeasurementTypes = [
+  {value: 'pcs', label: 'Pieces'},
+  {value: 'tbsp', label: 'Tablespoon'},
+  {value: 'tsp', label: 'Teaspoon'},
+  {value: 'oz', label: 'Ounce'},
+  {value: 'fl. oz.', label: 'Fluid Ounce'},
+  {value: 'c', label: 'Cup'},
+  {value: 'qt', label: 'Quart'},
+  {value: 'pt', label: 'Pint'},
+  {value: 'gal', label: 'Gallon'},
+  {value: 'lb', label: 'Pound'},
+  {value: 'mL', label: 'Milliliter'},
+  {value: 'g', label: 'Gram'},
+  {value: 'kg',  label: 'Kilogram'},
+  {value: 'l', label: 'Liter'},
+]

@@ -6,7 +6,6 @@ class CreateRecipes < ActiveRecord::Migration[6.1]
       t.string :cook_vessel
       t.string :diet_type
       t.string :good_for
-      t.date :date_added
       t.string :image
       t.string :instructions
       t.string :notes
