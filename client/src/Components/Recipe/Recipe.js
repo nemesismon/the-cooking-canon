@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React from 'react';
 import Card from 'react-bootstrap/Card'
-import { useSelector } from "react-redux";
-import FullRecipe from "./FullRecipe";
+import { useSelector } from 'react-redux';
+import FullRecipe from './FullRecipe';
 
 function Recipe() {
 
-  const handleFullRecipe = (recipe) => {
-    return (
-      <FullRecipe />
-    )
-  }
-
   const user = useSelector(state => state.user.user)
   console.log(user)
+
+  const handleFullRecipe = (recipe) => {
+    return (
+      <FullRecipe recipe={recipe} />
+    )
+  }
 
     const recipeLister =       
       JSON.stringify(user) !== '{}' && user.recipes.length > 0 ?

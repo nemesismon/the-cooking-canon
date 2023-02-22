@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   resources :ingredients
-  resources :sources
+  resources :sources, only: [:create, :index]
   resources :recipes, only: [:index, :show, :create]
   resources :users, only: [:create, :show]
 

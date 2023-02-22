@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import Form from "react-bootstrap/Form"
-import Button from "react-bootstrap/Button"
-import FloatingLabel from "react-bootstrap/esm/FloatingLabel";
+import React, { useState } from 'react';
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import FloatingLabel from 'react-bootstrap/esm/FloatingLabel';
 import Card from 'react-bootstrap/Card'
-import Container from "react-bootstrap/Container";
+import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import { createUser, userLogin, userLogout, clearErrors } from "./User/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { createUser, userLogin, userLogout, clearErrors } from './User/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import '../index.css'
 
@@ -26,9 +26,9 @@ function Home() {
   const errors = useSelector(state => state.user.errors)
   const loginStatus = useSelector(state => state.user.loginStatus)
 
-  console.log(state)
-  console.log(errors)
-  console.log(loginStatus)
+  // console.log(state)
+  // console.log(errors)
+  // console.log(loginStatus)
   
 
   const navigate = useNavigate()
@@ -72,28 +72,27 @@ function Home() {
   
   const forms = () => {
    
-
     if (loginStatus === false
       ) {
       if (login === true) {
         // debugger
-        const loginError = errors.length > 0 ? <p className="make_red">{errors[0].message}</p> : null
+        const loginError = errors.length > 0 ? <p className='make_red'>{errors[0].message}</p> : null
         return ( 
           <div>
             <br></br>
             {loginError}
             <Form onSubmit={handleUserLogin}>
             <Form.Group>
-              <FloatingLabel label="Username">
-                <Form.Control type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+              <FloatingLabel label='Username'>
+                <Form.Control type='text' placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)}/>
               </FloatingLabel>
               <br></br>
-              <FloatingLabel label="Password">
-                <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+              <FloatingLabel label='Password'>
+                <Form.Control type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}/>
               </FloatingLabel>
               <br></br>
-              <Button variant="primary" onClick={handleFormToggle}>Create Account</Button> &ensp;
-              <Button variant="primary" type="submit">Submit</Button>
+              <Button variant='primary' onClick={handleFormToggle}>Create Account</Button> &ensp;
+              <Button variant='primary' type='submit'>Submit</Button>
             </Form.Group>
             </Form>
             <br></br>
@@ -102,7 +101,7 @@ function Home() {
         )
       } else {
 
-          const createErrors = errors.length > 0 ? <p className="make_red">{
+          const createErrors = errors.length > 0 ? <p className='make_red'>{
           errors.map((error) => {
             return <li key={error}>{error}</li>
           })}</p> : null
@@ -113,32 +112,32 @@ function Home() {
           <Form onSubmit={handleCreateUser}>
           <Form.Group>
             <br></br>
-            <FloatingLabel label="Username">
-              <Form.Control type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
+            <FloatingLabel label='Username'>
+              <Form.Control type='text' placeholder='Username' value={username} onChange={e => setUsername(e.target.value)} />
             </FloatingLabel>
             <br></br>
-            <FloatingLabel label="Password">
-              <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+            <FloatingLabel label='Password'>
+              <Form.Control type='password' placeholder='Password' value={password} onChange={e => setPassword(e.target.value)} />
             </FloatingLabel>
             <br></br>
-            <FloatingLabel label="Password Confirmation" value={password_confirmation} onChange={e => setPasswordConfirmation(e.target.value)} >
-              <Form.Control type="password" placeholder="Password Confirmation" />
+            <FloatingLabel label='Password Confirmation' value={password_confirmation} onChange={e => setPasswordConfirmation(e.target.value)} >
+              <Form.Control type='password' placeholder='Password Confirmation' />
             </FloatingLabel>
             <br></br>
-            <FloatingLabel label="Email">
-              <Form.Control type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
+            <FloatingLabel label='Email'>
+              <Form.Control type='email' placeholder='Email' value={email} onChange={e => setEmail(e.target.value)}/>
             </FloatingLabel>
             <br></br>
-            <FloatingLabel label="Phone Number">
-              <Form.Control type="text" placeholder="Phone Number" value={phone} onChange={e => setPhone(e.target.value)}/>
+            <FloatingLabel label='Phone Number'>
+              <Form.Control type='text' placeholder='Phone Number' value={phone} onChange={e => setPhone(e.target.value)}/>
             </FloatingLabel>
             <br></br>
-            <FloatingLabel label="Birthday">
-              <Form.Control type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
+            <FloatingLabel label='Birthday'>
+              <Form.Control type='date' value={birthday} onChange={e => setBirthday(e.target.value)} />
             </FloatingLabel>
             <br></br>
-            <Button variant="primary" onClick={handleFormToggle}>Login</Button> &ensp;
-            <Button variant="primary" type="submit">Submit</Button>
+            <Button variant='primary' onClick={handleFormToggle}>Login</Button> &ensp;
+            <Button variant='primary' type='submit'>Submit</Button>
           </Form.Group>
           </Form>
           <br></br>

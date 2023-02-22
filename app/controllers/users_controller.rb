@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def create
-      user = User.new(create_params)
+      user = User.new(user_params)
       if user.valid?
         user.save!
         session[:user_id] = user.id
@@ -16,13 +16,13 @@ class UsersController < ApplicationController
     if user
       render json: user, status: :ok
     else
-      render json: { errors: "Unauthorized" }, status: :unauthorized
+      render json: { errors: 'Unauthorized' }, status: :unauthorized
     end
   end
 
   private
 
-  def create_params
+  def user_params
     params.permit(:username, :password, :password_confirmation, :email, :phone, :birthday)
   end
 

@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
+import React, { useEffect, useState } from 'react';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form'
-import Button from "react-bootstrap/Button";
+import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import { useDispatch, useSelector } from "react-redux";
-import { createRecipe } from "../User/userSlice";
-import { kitchenMeasurementTypes } from "../Ingredient/data";
-import Container from "react-bootstrap/Container";
+import { useDispatch, useSelector } from 'react-redux';
+import { createRecipe } from '../User/userSlice';
+import { kitchenMeasurementTypes } from '../Ingredient/data';
+import Container from 'react-bootstrap/Container';
 
 function RecipeForm() {
 
@@ -20,43 +20,54 @@ function RecipeForm() {
   const [instructions, setInstructions] = useState('')
   const [notes, setNotes] = useState('')
   const [ingredients, setIngredients] = useState([])
-  const [user_id, setUserID] = useState(0)
-  const [source_id, setSourceID] = useState(0)
+  const [source_id, setSourceID] = useState()
   const [amount, setAmount] = useState('')
   const [unit, setUnit] = useState('')
   const [ingName, setIngName] = useState('')
   const [preparation, setPreparation] = useState('')
-
-  console.log(ingredients)
+  const [sourceData, setSourceData] = useState([])
 
   const dispatch = useDispatch()
   const user = useSelector(state => state.user.user)
+  const errors = useSelector(state => state.user.errors)
+
+  console.log(ingredients)
+  console.log(user)
+  console.log(errors)
+
+  useEffect(() => {
+    fetch('/sources')
+    .then(r => r.json())
+    .then(data => setSourceData(data))
+  }, [])
 
   const recipeForm = () => {
 
-    // const fetchBody - check documentation for format
+    // const fetchBody? - check documentation for format
 
     const handleAddRecipe = async (e) => {
       e.preventDefault()
-      debugger
+      // debugger
       try {
-        await dispatch(createRecipe({name, meal_course, cook_vessel, diet_type, good_for, image, instructions, ingredients, notes, source_id})).unwrap()
+        await dispatch(createRecipe({name, meal_course, cook_vessel, diet_type, good_for, image, instructions, ingredients_attributes: [amount, unit, name, preparation], notes, source_id})).unwrap()
       } catch(err) {
       } finally {
+        // setName(''); setMealCourse(''); setCookVessel(''); setDietType(''); setGoodFor(''); setImage(''); setInstructions(''); setIngredients(''); setNotes(''); setSourceID();
       }
     }
 
     const sourceSelector = () => {
-      if (JSON.stringify(user) !== '{}') {
-        const currentSources = user.sources.map(source => 
+      // if (JSON.stringify(sourceData) !== '[]') {
+        const currentSources = sourceData.map(source => 
           <option value={source.id} key={source.id}>{source.author}</option>
         )
       return (
-        <Form.Select aria-label="Default select example">
+        <Form.Select aria-label='Default select example' onChange={e => setSourceID(e.target.value)}>
           <option>Select Source</option>
           {currentSources}
         </Form.Select>
-      )}
+      )
+    // }
     }
 
     const ingredientRow = () => {
@@ -103,39 +114,45 @@ function RecipeForm() {
       ingredients.length > 0 ? 
       ingredients.map(ingredient => { 
         return (
-          <p align='left' key={ingredient.id}>&ensp; &ensp; &ensp; {ingredient.amount} {ingredient.unit} {ingredient.name} - {ingredient.preparation}</p>
+          <li align='left' key={ingredient.id}>&ensp; &ensp; &ensp; {ingredient.amount} {ingredient.unit} {ingredient.name} - {ingredient.preparation}</li>
         )}) : null
+
+    const errDisplay = errors !== undefined ? <p className='make_red'>{
+      errors.map((error) => {
+        return <li key={error}>{error}</li>
+      })}</p> : null
 
     return (
       <div>
+        {errDisplay}
         <Form onSubmit={handleAddRecipe}>
           <Form.Group>
             <FloatingLabel label='Name'>
-              <Form.Control type='text' placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
+              <Form.Control type='text' placeholder='Name' value={name} onChange={e => setName(e.target.value)} />
             </FloatingLabel>
             <br></br>
             <FloatingLabel label='Meal Course'>
-              <Form.Control type='text' placeholder="Meal Course" value={meal_course} onChange={e => setMealCourse(e.target.value)} />
+              <Form.Control type='text' placeholder='Meal Course' value={meal_course} onChange={e => setMealCourse(e.target.value)} />
             </FloatingLabel>
             <br></br>
             <FloatingLabel label='Cooking Vessel'>
-              <Form.Control type='text' placeholder="Cooking Vessel" value={cook_vessel} onChange={e => setCookVessel(e.target.value)} />
+              <Form.Control type='text' placeholder='Cooking Vessel' value={cook_vessel} onChange={e => setCookVessel(e.target.value)} />
             </FloatingLabel>
             <br></br>
             <FloatingLabel label='Diet Type'>
-              <Form.Control type='text' placeholder="Diet Type" value={diet_type} onChange={e => setDietType(e.target.value)} />
+              <Form.Control type='text' placeholder='Diet Type' value={diet_type} onChange={e => setDietType(e.target.value)} />
             </FloatingLabel>
             <br></br>
             <FloatingLabel label='Good For'>
-              <Form.Control type='text' placeholder="Good For" value={good_for} onChange={e => setGoodFor(e.target.value)} />
+              <Form.Control type='text' placeholder='Good For' value={good_for} onChange={e => setGoodFor(e.target.value)} />
             </FloatingLabel>
             <br></br>
             <FloatingLabel label='Image'>
-              <Form.Control type='img' placeholder="Image" value={image} onChange={e => setImage(e.target.value)} />
+              <Form.Control type='img' placeholder='Image' value={image} onChange={e => setImage(e.target.value)} />
             </FloatingLabel>
             <br></br>
             <FloatingLabel label='Instructions'>
-              <Form.Control type='text' placeholder="Instructions" value={instructions} onChange={e => setInstructions(e.target.value)} />
+              <Form.Control type='text' placeholder='Instructions' value={instructions} onChange={e => setInstructions(e.target.value)} />
             </FloatingLabel>
             <br></br>
             <p align='left'><b>&ensp; Ingredients:</b></p>
@@ -143,7 +160,7 @@ function RecipeForm() {
             {ingredientRow()}
             <br></br>
             <FloatingLabel label='Notes'>
-              <Form.Control type='text' placeholder="Notes" value={notes} onChange={e => setNotes(e.target.value)} />
+              <Form.Control type='text' placeholder='Notes' value={notes} onChange={e => setNotes(e.target.value)} />
             </FloatingLabel>
             <br></br>
             {/* Need auto userID from backend */}

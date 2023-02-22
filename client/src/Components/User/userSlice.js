@@ -72,6 +72,22 @@ export const createRecipe = createAsyncThunk(
     }
 )
 
+export const createSource = createAsyncThunk(
+  'user/createSource', 
+    async (initialPost) => {
+      const response = await fetch('/sources', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json'},
+        body: JSON.stringify(initialPost),
+      })
+      const data = await response.json()
+      if (!response.ok){
+        throw new Error(data.errors)
+      }
+      return data
+    }
+)
+
 const userSlice = createSlice({
   name: 'user',
   initialState: {
@@ -117,14 +133,23 @@ const userSlice = createSlice({
     })
     builder.addCase(createRecipe.fulfilled, (state, action) => {
       // state.user.recipes.push
-      debugger
+      // debugger
     })
     builder.addCase(createRecipe.rejected, (state, action) => {
       state.errors = []
       const tempString = action.error.message
       const tempArray = tempString.split(',')
       state.errors = tempArray
+    })
+    builder.addCase(createSource.fulfilled, (state, action) => {
       // debugger
+      state.user.sources.push(action.payload)
+    })
+    builder.addCase(createSource.rejected, (state, action) => {
+      state.errors = []
+      const tempString = action.error.message
+      const tempArray = tempString.split(',')
+      state.errors = tempArray
     })
   }
 })
