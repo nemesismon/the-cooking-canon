@@ -4,10 +4,10 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
+import Container from 'react-bootstrap/Container';
 import { useDispatch, useSelector } from 'react-redux';
 import { createRecipe } from '../User/userSlice';
 import { kitchenMeasurementTypes } from '../Ingredient/data';
-import Container from 'react-bootstrap/Container';
 
 function RecipeForm() {
 
@@ -43,32 +43,43 @@ function RecipeForm() {
 
   const recipeForm = () => {
 
-    // const fetchBody? - check documentation for format
-
     const handleAddRecipe = async (e) => {
       e.preventDefault()
-      // debugger
       try {
-        await dispatch(createRecipe({name, meal_course, cook_vessel, diet_type, good_for, image, instructions, ingredients_attributes: [amount, unit, name, preparation], notes, source_id})).unwrap()
-      } catch(err) {
-      } finally {
-        // setName(''); setMealCourse(''); setCookVessel(''); setDietType(''); setGoodFor(''); setImage(''); setInstructions(''); setIngredients(''); setNotes(''); setSourceID();
-      }
-    }
+        const recipe = await dispatch(createRecipe({name, meal_course, cook_vessel, diet_type, good_for, image, instructions, ingredients, notes, source_id})).unwrap()
+        console.log(recipe)
+        if (recipe.id > 0) {
+          setName(''); setMealCourse(''); setCookVessel(''); setDietType(''); setGoodFor(''); setImage(''); setInstructions(''); setIngredients(''); setNotes(''); setSourceID();
+        }
+      } 
+      catch(err) {
+          console.log(err)
+    }}
 
     const sourceSelector = () => {
-      // if (JSON.stringify(sourceData) !== '[]') {
         const currentSources = sourceData.map(source => 
-          <option value={source.id} key={source.id}>{source.author}</option>
-        )
+          <option value={source.id} key={source.id}>{source.author}</option>)
+
       return (
         <Form.Select aria-label='Default select example' onChange={e => setSourceID(e.target.value)}>
           <option>Select Source</option>
           {currentSources}
         </Form.Select>
       )
-    // }
     }
+
+    const unitSelector = () => {
+      const currentUnit = kitchenMeasurementTypes.map(type => 
+        <option value={type.value} key={type.value}>{type.label}</option>)
+
+    return (
+      <Form.Select aria-label='Unit select' onChange={e => setUnit(e.target.value)}>
+        <option>Select Source</option>
+        {currentUnit}
+      </Form.Select>
+    )
+  }
+
 
     const ingredientRow = () => {
       return (
@@ -81,9 +92,10 @@ function RecipeForm() {
             </FloatingLabel>
           </Col>
           <Col>
-            <FloatingLabel label='Unit'>
+            {unitSelector()}
+            {/* <FloatingLabel label='Unit'>
               <Form.Control type='text' placeholder='Unit' value={unit} onChange={e => setUnit(e.target.value)} />
-            </FloatingLabel>
+            </FloatingLabel> */}
           </Col>
           <Col>
             <FloatingLabel label='Ingredient'>
@@ -117,7 +129,7 @@ function RecipeForm() {
           <li align='left' key={ingredient.id}>&ensp; &ensp; &ensp; {ingredient.amount} {ingredient.unit} {ingredient.name} - {ingredient.preparation}</li>
         )}) : null
 
-    const errDisplay = errors !== undefined ? <p className='make_red'>{
+    const errDisplay = JSON.stringify(errors) !== '[]' ? <p className='make_red'>{
       errors.map((error) => {
         return <li key={error}>{error}</li>
       })}</p> : null

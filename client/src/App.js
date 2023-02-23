@@ -5,6 +5,7 @@ import NavBar from './Components/NavBar';
 import Home from './Components/Home';
 import Recipe from './Components/Recipe/Recipe';
 import RecipeForm from './Components/Recipe/RecipeForm';
+import FullRecipe from './Components/Recipe/FullRecipe';
 import Source from './Components/Source/Source';
 import SourceForm from './Components/Source/SourceForm';
 import { useDispatch } from 'react-redux';
@@ -37,6 +38,7 @@ function App() {
             <Route path='/recipe_form' element={<RecipeForm />} />
             <Route path='/source' element={<Source />} />
             <Route path='/source_form' element={<SourceForm />} />
+            <Route path='/full_recipe' element={<FullRecipe />} />
           </Routes>
       </div>
     </div>

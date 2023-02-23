@@ -132,8 +132,8 @@ const userSlice = createSlice({
       state.errors = []
     })
     builder.addCase(createRecipe.fulfilled, (state, action) => {
-      // state.user.recipes.push
-      // debugger
+      state.errors = []
+      state.user.recipes.push(action.payload)
     })
     builder.addCase(createRecipe.rejected, (state, action) => {
       state.errors = []
@@ -142,7 +142,7 @@ const userSlice = createSlice({
       state.errors = tempArray
     })
     builder.addCase(createSource.fulfilled, (state, action) => {
-      // debugger
+      state.errors = []
       state.user.sources.push(action.payload)
     })
     builder.addCase(createSource.rejected, (state, action) => {

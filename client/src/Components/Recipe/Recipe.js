@@ -1,37 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card'
 import { useSelector } from 'react-redux';
-import FullRecipe from './FullRecipe';
+import { useNavigate } from 'react-router-dom';
 
 function Recipe() {
 
   const user = useSelector(state => state.user.user)
-  console.log(user)
 
-  const handleFullRecipe = (recipe) => {
-    return (
-      <FullRecipe recipe={recipe} />
-    )
+  const navigate = useNavigate()
+
+  const recipeDetails = (recipe) => {
+    navigate('/full_recipe', {state:{recipe}})
   }
 
-    const recipeLister =       
+    const recipeLister = 
       JSON.stringify(user) !== '{}' && user.recipes.length > 0 ?
-        <p>{user.recipes.map((recipe) => {
+        <>{user.recipes.map((recipe) => {
           return (
-            <div>
-                <Card style={{ width: '75rem' }} key={recipe.id} onClick={() => handleFullRecipe(recipe)}>
+            <div key={recipe.id}>
+                <Card style={{ width: '75rem' }}>
                 {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
-                <Card.Body>
+                <Card.Body onClick={() => recipeDetails(recipe)}>
                   <Card.Title>{recipe.name}</Card.Title>
                   <Card.Text>
-                    Good For: {recipe.good_for}, &ensp; Diet: {recipe.diet_type}
+                    Good For: {recipe.good_for}; &ensp; Diet: {recipe.diet_type}
                   </Card.Text>
                 </Card.Body>
               </Card>
               <br></br>
             </div>
           )
-        })}</p> : <div><h6>Add some recipes!</h6></div>
+        })}</> : <div><h6>Add some recipes!</h6></div>
         
   return (
     <div>

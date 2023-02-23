@@ -10,10 +10,10 @@ function Source() {
   console.log(state)
 
   const sourceLister = sources !== undefined && JSON.stringify(sources) !== '[]' ?
-    <p>{sources.map((source) => {
+    <>{sources.map((source) => {
       return (
-        <div>
-            <Card style={{ width: '75rem' }} key={source.id}>
+        <div key={source.id}>
+            <Card style={{ width: '75rem' }}>
             {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
             <Card.Body>
               <Card.Title>{source.author}</Card.Title>
@@ -24,7 +24,7 @@ function Source() {
           <br></br>
         </div>
       )
-    })}</p> : <div><h6>Add some sources!</h6></div>
+    })}</> : <div><h6>Add sources and assign them to recipes to see your list!</h6></div>
 
   return (
     <div>

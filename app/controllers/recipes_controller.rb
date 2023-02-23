@@ -6,6 +6,10 @@ class RecipesController < ApplicationController
 
     def create
       recipe = @user.recipes.create!(recipe_params)
+        recipeItems = params[:ingredients].map do |ingredient|
+          Ingredient.create!(amount: ingredient[:amount], unit: ingredient[:unit], name: ingredient[:name], preparation: ingredient[:preparation], recipe_id: recipe.id)
+        end
+        recipe.ingredients = recipeItems
       render json: recipe, status: :ok
     end
 
@@ -16,7 +20,7 @@ class RecipesController < ApplicationController
     end
 
     def recipe_params
-      params.permit(:name, :meal_course, :cook_vessel, :diet_type, :good_for, :image, :instructions, :notes, :source_id, ingredients_attributes: [:amount, :unit, :name, :preparation])
+      params.require(:recipe).permit(:name, :meal_course, :cook_vessel, :diet_type, :good_for, :image, :instructions, :notes, :source_id, ingredients: [:amount, :unit, :name, :preparation])
     end
 
     def render_record_not_found
