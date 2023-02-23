@@ -4,6 +4,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button'
 import { useDispatch, useSelector } from 'react-redux';
 import { createSource } from '../User/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 function SourceForm() {
 
@@ -13,9 +14,9 @@ function SourceForm() {
   const [birthday, setBirthday] = useState('')
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const errors = useSelector(state => state.user.errors)
-
-  // console.log(errors)
+  const loginStatus = useSelector(state => state.user.loginStatus)
 
   const handleSourceSubmit = async (e) => {
     e.preventDefault()
@@ -32,8 +33,8 @@ function SourceForm() {
       return <li key={error}>{error}</li>
     })}</p> : null
 
-  const sourceForm = () => {
-  return (
+  const sourceForm = 
+    loginStatus ?
     <div>
       {errDisplay}
       <Form onSubmit={handleSourceSubmit}>
@@ -59,15 +60,20 @@ function SourceForm() {
       </Form.Group>
       </Form>
       <br></br>
-    </div>
-  )}
+      </div> : 
+      <div>
+          <p><b>Unauthorized</b></p>
+          <br></br>
+          <Button onClick={() => navigate('/login')}>Login</Button>
+      </div>
+
 
   return (
     <div>
       <br></br>
     <h3>Add Source</h3>
       <br></br>
-      {sourceForm()}
+      {sourceForm}
     </div>    
   )
 

@@ -11,6 +11,7 @@ function FullRecipe() {
   const navigate = useNavigate()
 
   // debugger
+  
 
   const handleGoBack = () => {
     navigate('/recipe_list')

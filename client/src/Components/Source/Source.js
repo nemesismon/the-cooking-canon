@@ -1,15 +1,21 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+import { useNavigate } from "react-router-dom";
 
 function Source() {
 
   const sources = useSelector(state => state.user.user.sources)
   const state = useSelector(state => state)
+  const loginStatus = useSelector(state => state.user.loginStatus)
+  const navigate = useNavigate()
 
   console.log(state)
 
-  const sourceLister = sources !== undefined && JSON.stringify(sources) !== '[]' ?
+  const sourceLister = 
+    loginStatus ?
+    sources !== undefined && JSON.stringify(sources) !== '[]' ?
     <>{sources.map((source) => {
       return (
         <div key={source.id}>
@@ -25,6 +31,11 @@ function Source() {
         </div>
       )
     })}</> : <div><h6>Add sources and assign them to recipes to see your list!</h6></div>
+    :       <div>
+      <p><b>Unauthorized</b></p>
+      <br></br>
+      <Button onClick={() => navigate('/login')}>Login</Button>
+    </div>
 
   return (
     <div>

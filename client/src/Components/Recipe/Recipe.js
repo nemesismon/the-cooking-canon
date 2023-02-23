@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 function Recipe() {
 
   const user = useSelector(state => state.user.user)
+  const loginStatus = useSelector(state => state.user.loginStatus)
 
   const navigate = useNavigate()
 
@@ -14,6 +16,7 @@ function Recipe() {
   }
 
     const recipeLister = 
+      loginStatus ?
       JSON.stringify(user) !== '{}' && user.recipes.length > 0 ?
         <>{user.recipes.map((recipe) => {
           return (
@@ -31,6 +34,7 @@ function Recipe() {
             </div>
           )
         })}</> : <div><h6>Add some recipes!</h6></div>
+        : <div><p><b>Unauthorized</b></p><br></br><Button onClick={() => navigate('/login')}>Login</Button></div>
         
   return (
     <div>

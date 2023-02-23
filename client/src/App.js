@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import { useState } from 'react';
 import './App.css';
 import NavBar from './Components/NavBar';
+import Login from './Components/Login'
 import Home from './Components/Home';
 import Recipe from './Components/Recipe/Recipe';
 import RecipeForm from './Components/Recipe/RecipeForm';
@@ -33,12 +34,13 @@ function App() {
       <div>
         <NavBar />
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
             <Route path='/recipe_list' element={<Recipe />} />
             <Route path='/recipe_form' element={<RecipeForm />} />
             <Route path='/source' element={<Source />} />
             <Route path='/source_form' element={<SourceForm />} />
             <Route path='/full_recipe' element={<FullRecipe />} />
+            <Route path='/' element={<Home />} />
           </Routes>
       </div>
     </div>

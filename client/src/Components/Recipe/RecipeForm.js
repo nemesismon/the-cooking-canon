@@ -8,6 +8,7 @@ import Container from 'react-bootstrap/Container';
 import { useDispatch, useSelector } from 'react-redux';
 import { createRecipe } from '../User/userSlice';
 import { kitchenMeasurementTypes } from '../Ingredient/data';
+import { useNavigate } from 'react-router-dom';
 
 function RecipeForm() {
 
@@ -30,6 +31,8 @@ function RecipeForm() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user.user)
   const errors = useSelector(state => state.user.errors)
+  const loginStatus = useSelector(state => state.user.loginStatus)
+  const navigate = useNavigate()
 
   console.log(ingredients)
   console.log(user)
@@ -40,8 +43,6 @@ function RecipeForm() {
     .then(r => r.json())
     .then(data => setSourceData(data))
   }, [])
-
-  const recipeForm = () => {
 
     const handleAddRecipe = async (e) => {
       e.preventDefault()
@@ -79,7 +80,6 @@ function RecipeForm() {
       </Form.Select>
     )
   }
-
 
     const ingredientRow = () => {
       return (
@@ -134,7 +134,8 @@ function RecipeForm() {
         return <li key={error}>{error}</li>
       })}</p> : null
 
-    return (
+    const recipeForm = 
+      loginStatus ?
       <div>
         {errDisplay}
         <Form onSubmit={handleAddRecipe}>
@@ -182,16 +183,19 @@ function RecipeForm() {
           </Form.Group>
         </Form>
         <br></br>
+      </div> :       
+      <div>
+          <br></br>
+          <p><b>Unauthorized</b></p>
+          <br></br>
+          <Button onClick={() => navigate('/login')}>Login</Button>
       </div>
-    )
-  }
 
   return (
     <div>
       <br></br>
     <h3>Add Recipe</h3>
-      <br></br>
-      {recipeForm()}
+      {recipeForm}
     </div>)
 }
 
