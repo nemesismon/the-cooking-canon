@@ -34,11 +34,13 @@ function App() {
       <div>
         <NavBar />
           <Routes>
+
+            {/* FIX ROUTES => /recipes /recipe/new /sources /source/new COMPONENTS TOO!!! */}
             <Route path='/login' element={<Login />} />
             <Route path='/recipe_list' element={<Recipe />} />
             <Route path='/recipe_form' element={<RecipeForm />} />
             <Route path='/source' element={<Source />} />
-            <Route path='/source_form' element={<SourceForm />} />
+            <Route path='/source_form' element={<SourceForm />} /> 
             <Route path='/full_recipe' element={<FullRecipe />} />
             <Route path='/' element={<Home />} />
           </Routes>

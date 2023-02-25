@@ -1,8 +1,33 @@
 import React from "react";
 import Nav from 'react-bootstrap/Nav'
 import Navbar from "react-bootstrap/Navbar"
+// import Button from 'react-bootstrap/Button'
+import { useDispatch, useSelector } from "react-redux";
+import { userLogout } from './User/userSlice';
+import { useNavigate } from "react-router-dom";
+
 
 function NavBar() {
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const state = useSelector(state => state.user)
+  const loginStatus = useSelector(state => state.user.loginStatus)
+
+  const handleLogout = async (e) => {
+    e.preventDefault()
+    try {
+      const response = await dispatch(userLogout()).unwrap()
+      if (response.message === 'sessTerm'  || response.error === 'Unauthorized') {
+        navigate('/login')
+      }
+    } catch (err) {
+    } finally {
+    }
+  }
+
+  const buttonToggle = loginStatus ? 
+    <div> &ensp; <button onClick={handleLogout} variant='secondary'>Logout, {state.user.username}</button></div> : null
 
 return (
   <Navbar className="justify-content-center" bg="dark" variant="dark">
@@ -23,6 +48,7 @@ return (
         <Nav.Link href="source_form">Add Source</Nav.Link>
       </Nav.Item>
     </Nav>
+  {buttonToggle}
   </Navbar>
 )
 }

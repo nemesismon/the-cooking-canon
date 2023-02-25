@@ -93,9 +93,6 @@ function RecipeForm() {
           </Col>
           <Col>
             {unitSelector()}
-            {/* <FloatingLabel label='Unit'>
-              <Form.Control type='text' placeholder='Unit' value={unit} onChange={e => setUnit(e.target.value)} />
-            </FloatingLabel> */}
           </Col>
           <Col>
             <FloatingLabel label='Ingredient'>
@@ -126,7 +123,7 @@ function RecipeForm() {
       ingredients.length > 0 ? 
       ingredients.map(ingredient => { 
         return (
-          <li align='left' key={ingredient.id}>&ensp; &ensp; &ensp; {ingredient.amount} {ingredient.unit} {ingredient.name} - {ingredient.preparation}</li>
+          <li align='left' key={ingredient.id}>&ensp; &ensp; &ensp; {ingredient.amount} {ingredient.unit} {ingredient.name} {ingredient.preparation}</li>
         )}) : null
 
     const errDisplay = JSON.stringify(errors) !== '[]' ? <p className='make_red'>{
@@ -140,6 +137,9 @@ function RecipeForm() {
         {errDisplay}
         <Form onSubmit={handleAddRecipe}>
           <Form.Group>
+            <br></br>
+            {sourceSelector()}
+            <br></br>
             <FloatingLabel label='Name'>
               <Form.Control type='text' placeholder='Name' value={name} onChange={e => setName(e.target.value)} />
             </FloatingLabel>
@@ -176,25 +176,18 @@ function RecipeForm() {
               <Form.Control type='text' placeholder='Notes' value={notes} onChange={e => setNotes(e.target.value)} />
             </FloatingLabel>
             <br></br>
-            {/* Need auto userID from backend */}
-            {sourceSelector()}
-            <br></br>
             <Button type='submit'>Submit</Button>
           </Form.Group>
         </Form>
         <br></br>
-      </div> :       
-      <div>
-          <br></br>
-          <p><b>Unauthorized</b></p>
-          <br></br>
-          <Button onClick={() => navigate('/login')}>Login</Button>
-      </div>
+      </div> : navigate('/login')
 
   return (
     <div>
       <br></br>
     <h3>Add Recipe</h3>
+      <button variant='secondary' onClick={() => navigate('/source_form')}>Need a new Source? - Click here!</button>
+      <br></br>
       {recipeForm}
     </div>)
 }

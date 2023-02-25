@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { deleteRecipe } from '../User/userSlice';
 
 function Recipe() {
 
   const user = useSelector(state => state.user.user)
   const loginStatus = useSelector(state => state.user.loginStatus)
-
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const recipeDetails = (recipe) => {
     navigate('/full_recipe', {state:{recipe}})
+  }
+
+  const handleRecipeDelete = (recipe) => {
+    dispatch(deleteRecipe(recipe))
   }
 
     const recipeLister = 
@@ -29,12 +34,13 @@ function Recipe() {
                     Good For: {recipe.good_for}; &ensp; Diet: {recipe.diet_type}
                   </Card.Text>
                 </Card.Body>
+                <Button variant='primary' onClick={() => handleRecipeDelete(recipe)}>Delete</Button>
               </Card>
               <br></br>
             </div>
           )
         })}</> : <div><h6>Add some recipes!</h6></div>
-        : <div><p><b>Unauthorized</b></p><br></br><Button onClick={() => navigate('/login')}>Login</Button></div>
+        : navigate('/login')
         
   return (
     <div>

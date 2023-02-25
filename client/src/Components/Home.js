@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button'
+import React from 'react';
 import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import { userLogout } from './User/userSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import '../index.css'
 
 function Home() {
  
-  const dispatch = useDispatch()
   const state = useSelector(state => state.user)
   const errors = useSelector(state => state.user.errors)
   const loginStatus = useSelector(state => state.user.loginStatus)
@@ -21,21 +18,9 @@ function Home() {
   console.log(errors)
   console.log(loginStatus)
   
-  const handleLogout = async (e) => {
-    e.preventDefault()
-    try {
-      const response = await dispatch(userLogout()).unwrap()
-      debugger
-      if (response.message === 'sessTerm'  || response.error === 'Unauthorized') {
-        navigate('/login')
-      }
-    } catch (err) {
-    } finally {}
-  }
-  
-  const homeMenu =
+  const homeMenu = 
     loginStatus ?
-    <div>
+     <div>
           <br></br>
           <br></br>
           <Container>
@@ -92,24 +77,15 @@ function Home() {
           <br></br>
           <br></br>
           <br></br>
-          {/* <br></br> */}
-          <Button onClick={handleLogout}>Logout, {state.user.username}</Button>
-      </div> : 
-      <div>
-          <br></br>
-          <p><b>Unauthorized</b></p>
-          <br></br>
-          <Button onClick={() => navigate('/login')}>Login</Button>
-      </div>
-
+      </div> : navigate('/login')
 
   return (
-    <>
+    <div>
       <br></br>
       <h3>Welcome</h3>
-      <div>{homeMenu}</div>
+      {homeMenu}
       <br></br>
-    </>
+    </div>
   )
 
 }

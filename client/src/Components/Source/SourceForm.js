@@ -60,12 +60,7 @@ function SourceForm() {
       </Form.Group>
       </Form>
       <br></br>
-      </div> : 
-      <div>
-          <p><b>Unauthorized</b></p>
-          <br></br>
-          <Button onClick={() => navigate('/login')}>Login</Button>
-      </div>
+      </div> : navigate('/login')
 
 
   return (

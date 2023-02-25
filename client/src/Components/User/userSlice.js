@@ -98,6 +98,14 @@ const userSlice = createSlice({
   reducers: {
     clearErrors(state) {
       state.errors = []
+    },
+    deleteRecipe(state, action) {
+      fetch(`/recipes/${action.payload.id}`, {
+        method: 'DELETE',
+        headers: { 'Content-type': 'application/json'}
+      })
+      const recipeIndex = state.user.recipes.findIndex(recipe => recipe.id === action.payload.id)
+      state.user.recipes.splice(recipeIndex, recipeIndex + 1)
     }
   },
   extraReducers(builder) {
@@ -116,15 +124,13 @@ const userSlice = createSlice({
       state.user = action.payload
     })
     builder.addCase(userLogin.rejected, (state, action) => {
+      state.loginStatus = false
       state.errors = []
       state.errors.push(action.error)
     })
     builder.addCase(fetchUser.fulfilled, (state, action) => {
       state.loginStatus = true
       state.user = action.payload
-    })
-    builder.addCase(fetchUser.rejected, (state, action) => {
-      // console.log(action.error)
     })
     builder.addCase(userLogout.fulfilled, (state) => {
       state.loginStatus = false
@@ -154,6 +160,6 @@ const userSlice = createSlice({
   }
 })
 
-export const { clearErrors } = userSlice.actions
+export const { clearErrors, deleteRecipe } = userSlice.actions
 
 export default userSlice.reducer

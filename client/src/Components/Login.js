@@ -45,7 +45,6 @@ function Login() {
       try {
         await dispatch(userLogin({username, password})).unwrap()
         } catch (err) {
-          // console.log(err)
         } finally {
           setUsername('')
           setPassword('')  
@@ -54,7 +53,6 @@ function Login() {
 
   const userLoginCreate = () => {
       if (login === false) {
-        // debugger
         const loginError = errors.length > 0 ? <p className='make_red'>{errors[0].message}</p> : null
         return ( 
           <div>

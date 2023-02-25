@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
 import { useNavigate } from "react-router-dom";
 
 function Source() {
@@ -31,11 +30,7 @@ function Source() {
         </div>
       )
     })}</> : <div><h6>Add sources and assign them to recipes to see your list!</h6></div>
-    :       <div>
-      <p><b>Unauthorized</b></p>
-      <br></br>
-      <Button onClick={() => navigate('/login')}>Login</Button>
-    </div>
+    : navigate('/login')
 
   return (
     <div>

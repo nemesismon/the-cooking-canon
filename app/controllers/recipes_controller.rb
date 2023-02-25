@@ -13,6 +13,12 @@ class RecipesController < ApplicationController
       render json: recipe, status: :ok
     end
 
+    def destroy
+      recipe = @user.recipes.find_by!(id: params[:id])
+      recipe.delete
+      head :no_content
+    end
+
   private
 
     def find_user
