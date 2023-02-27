@@ -29,28 +29,46 @@ function NavBar() {
   const buttonToggle = loginStatus ? 
     <div> &ensp; <button onClick={handleLogout} variant='secondary'>Logout, {state.user.username}</button></div> : null
 
-return (
-  <Navbar className="justify-content-center" bg="dark" variant="dark">
-    <Nav fill variant="tabs" >
-      <Nav.Item>
-        <Nav.Link href="/">Home</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link href="/recipe_list">Recipes</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link href="/recipe_form">Add Recipe</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link href="source">Sources</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link href="source_form">Add Source</Nav.Link>
-      </Nav.Item>
-    </Nav>
-  {buttonToggle}
-  </Navbar>
-)
+  const navToggle = 
+    loginStatus ? 
+    <Navbar className="justify-content-center" bg="dark" variant="dark">
+      <Nav fill variant="tabs" >
+        <Nav.Item>
+          <Nav.Link href="/">Home</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link href="/recipe_list">Recipes</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link href="/recipe_form">Add Recipe</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link href="source">Sources</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link href="source_form">Add Source</Nav.Link>
+        </Nav.Item>
+      </Nav>
+    {buttonToggle}
+    </Navbar> 
+    : <NavBar className='justify-content-center' bg='dark' variant='dark'>
+        <Nav fill variant='tabs'>
+          <Nav.Item>
+            <Nav.Link href='/login'>Login</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link href='/users/new'>Create Account</Nav.Link>
+          </Nav.Item>
+        </Nav>
+        {buttonToggle}
+      </NavBar>
+
+  return (
+    <div>
+      {navToggle}
+    </div>
+  )
+
 }
 
 export default NavBar
