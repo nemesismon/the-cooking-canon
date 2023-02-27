@@ -183,6 +183,7 @@ PLATFORMS
   ruby
   x86_64-darwin-19
   x86_64-linux
+  x86_64-arm64
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.12)
