@@ -8,9 +8,9 @@
 
 puts 'Loading...'
 
-# users = User.create([
-#   {username:'admin',password:'admin',password_confirmation:'admin',email:'mike@email.com',phone:'6145173942',birthday:'1982-11-07'}
-# ])
+users = User.create([
+  {username:'admin',password:'admin',password_confirmation:'admin',email:'mike@email.com',phone:'6145173942',birthday:'1982-11-07'}
+])
 puts 'Users ✓'
 
 sources = Source.create!([
