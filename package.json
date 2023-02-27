@@ -11,6 +11,7 @@
     "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.2"
+    "@reduxjs/toolkit": "^1.9.2",
+    "kill-port": "^2.0.1"
   }
 }
