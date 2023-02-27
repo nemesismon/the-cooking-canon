@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from './Components/User/userSlice';
 // import logo from '/Components/TCCHorizLogo.png'
 
-
 function App() {
 
   const [fetchRun, setFetchRun] = useState(false)
