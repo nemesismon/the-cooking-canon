@@ -14,6 +14,8 @@ function NavBar() {
   const state = useSelector(state => state.user)
   const loginStatus = useSelector(state => state.user.loginStatus)
 
+  // Need to get loginStatus fixed here
+
   const handleLogout = async (e) => {
     e.preventDefault()
     try {
