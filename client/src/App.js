@@ -18,8 +18,6 @@ function App() {
   const [fetchRun, setFetchRun] = useState(false)
 
   const dispatch = useDispatch()
-  const loginStatus = useSelector(state => state.user.loginStatus)
-  const navigate = useNavigate()
 
   if (fetchRun === false) {
     dispatch(fetchUser()).unwrap()

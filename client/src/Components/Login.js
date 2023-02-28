@@ -22,9 +22,9 @@ function Login() {
   const loginStatus = useSelector(state => state.user.loginStatus)
   const navigate = useNavigate()
 
-  if (loginStatus === true) {
-    navigate('/')
-  }
+  // if (loginStatus === true) {
+  //   navigate('/')
+  // }
 
   const handleFormToggle = () => {
     dispatch(clearErrors())

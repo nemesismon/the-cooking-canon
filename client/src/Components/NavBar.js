@@ -12,7 +12,7 @@ function NavBar() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const state = useSelector(state => state.user)
-  const loginStatus = useSelector(state => state.user.loginStatus)
+  // const loginStatus = useSelector(state => state.user.loginStatus)
 
   // Need to get loginStatus fixed here
 
@@ -28,11 +28,13 @@ function NavBar() {
     }
   }
 
-  const buttonToggle = loginStatus ? 
-    <div> &ensp; <button onClick={handleLogout} variant='secondary'>Logout, {state.user.username}</button></div> : null
+  // const buttonToggle = loginStatus ? 
+    // <div> &ensp; <button onClick={handleLogout} variant='secondary'>Logout, {state.user.username}</button></div> : null
 
-  const navToggle = 
-    loginStatus ? 
+  // const navToggle = 
+  //   loginStatus ? 
+
+  const theNavBar =
     <Navbar className="justify-content-center" bg="dark" variant="dark">
       <Nav fill variant="tabs" >
         <Nav.Item>
@@ -51,23 +53,24 @@ function NavBar() {
           <Nav.Link href="source_form">Add Source</Nav.Link>
         </Nav.Item>
       </Nav>
-    {buttonToggle}
+    {/* {buttonToggle} */}
     </Navbar> 
-    : <NavBar className='justify-content-center' bg='dark' variant='dark'>
-        <Nav fill variant='tabs'>
-          <Nav.Item>
-            <Nav.Link href='/login'>Login</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href='/users/new'>Create Account</Nav.Link>
-          </Nav.Item>
-        </Nav>
-        {buttonToggle}
-      </NavBar>
+    // : <NavBar className='justify-content-center' bg='dark' variant='dark'>
+    //     <Nav fill variant='tabs'>
+    //       <Nav.Item>
+    //         <Nav.Link href='/login'>Login</Nav.Link>
+    //       </Nav.Item>
+    //       <Nav.Item>
+    //         <Nav.Link href='/users/new'>Create Account</Nav.Link>
+    //       </Nav.Item>
+    //     </Nav>
+    //     {buttonToggle}
+    //   </NavBar>
 
   return (
     <div>
-      {navToggle}
+      {/* {navToggle} */}
+      {theNavBar}
     </div>
   )
 
