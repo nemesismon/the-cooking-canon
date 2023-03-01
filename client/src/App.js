@@ -12,7 +12,7 @@ import Sources from './Components/Source/Sources';
 import NewSource from './Components/Source/NewSource';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from './Components/User/userSlice';
-// import logo from '/Components/TCCHorizLogo.png'
+import Logo from './Images/the-cooking-canon-logo.png'
 
 function App() {
 
@@ -34,8 +34,7 @@ function App() {
   return (
     <div className='App'>
       <header className='App-header'>
-        <>The Cooking Canon</>
-        {/* {logo} */}
+        <img height='100px' src={Logo}/>
       </header>
       <div>
         {navBarToggle}
