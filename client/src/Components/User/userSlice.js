@@ -2,10 +2,10 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
   export const createUser = createAsyncThunk(
     'user/createUser', 
-    async (initialPost) => {
+    async (userData) => {
       const response = await fetch('/users', {
         method: 'POST',
-        body: JSON.stringify(initialPost),
+        body: JSON.stringify(userData),
         headers: {'Content-type': 'application/json'}
       })
       const data = await response.json()
@@ -29,10 +29,10 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
     
   export const userLogin = createAsyncThunk(
     'user/userLogin',
-      async (initialPost) => {
+      async (loginCredentials) => {
         const response = await fetch('/login', {
           method: 'POST',
-          body: JSON.stringify(initialPost),
+          body: JSON.stringify(loginCredentials),
           headers: {'Content-type': 'application/json'},
         })
         const data = await response.json()
@@ -58,11 +58,11 @@ export const userLogout = createAsyncThunk(
 
 export const createRecipe = createAsyncThunk(
   'user/createRecipe', 
-    async (initialPost) => {
+    async (recipeData) => {
       const response = await fetch('/recipes', {
         method: 'POST',
         headers: {'Content-type': 'application/json'},
-        body: JSON.stringify(initialPost),
+        body: JSON.stringify(recipeData),
       })
       const data = await response.json()
       if (!response.ok){
@@ -74,11 +74,11 @@ export const createRecipe = createAsyncThunk(
 
 export const createSource = createAsyncThunk(
   'user/createSource', 
-    async (initialPost) => {
+    async (sourceData) => {
       const response = await fetch('/sources', {
         method: 'POST',
         headers: { 'Content-type': 'application/json'},
-        body: JSON.stringify(initialPost),
+        body: JSON.stringify(sourceData),
       })
       const data = await response.json()
       if (!response.ok){

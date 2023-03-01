@@ -2,13 +2,14 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import './App.css';
 import NavBar from './Components/NavBar';
+import NavBarOut from './Components/NavBarOut.js';
 import Login from './Components/Login'
 import Home from './Components/Home';
-import Recipe from './Components/Recipe/Recipe';
-import RecipeForm from './Components/Recipe/RecipeForm';
-import FullRecipe from './Components/Recipe/FullRecipe';
-import Source from './Components/Source/Source';
-import SourceForm from './Components/Source/SourceForm';
+import Recipes from './Components/Recipe/Recipes';
+import NewRecipe from './Components/Recipe/NewRecipe';
+import RecipeDetails from './Components/Recipe/RecipeDetails';
+import Sources from './Components/Source/Sources';
+import NewSource from './Components/Source/NewSource';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from './Components/User/userSlice';
 // import logo from '/Components/TCCHorizLogo.png'
@@ -16,13 +17,19 @@ import { fetchUser } from './Components/User/userSlice';
 function App() {
 
   const [fetchRun, setFetchRun] = useState(false)
+  const [login, setLogin] = useState(false)
 
   const dispatch = useDispatch()
+  const loginStatus = useSelector(state => state.user.loginStatus)
+
+  console.log(loginStatus)
 
   if (fetchRun === false) {
     dispatch(fetchUser()).unwrap()
     setFetchRun(true)
   }
+
+  const navBarToggle = loginStatus ? <NavBar /> : <NavBarOut setLogin={setLogin}/>
 
   return (
     <div className='App'>
@@ -31,15 +38,14 @@ function App() {
         {/* {logo} */}
       </header>
       <div>
-        <NavBar />
+        {navBarToggle}
           <Routes>
-            {/* FIX ROUTES => /recipes /recipe/new /sources /source/new COMPONENTS TOO!!! */}
-            <Route path='/login' element={<Login />} />
-            <Route path='/recipe_list' element={<Recipe />} />
-            <Route path='/recipe_form' element={<RecipeForm />} />
-            <Route path='/source' element={<Source />} />
-            <Route path='/source_form' element={<SourceForm />} /> 
-            <Route path='/full_recipe' element={<FullRecipe />} />
+            <Route path='/login' element={<Login login={login} setLogin={setLogin}/>} />
+            <Route path='/recipes/new' element={<NewRecipe />} />
+            <Route path='/recipes' element={<Recipes />} />
+            <Route path='/sources' element={<Sources />} />
+            <Route path='/sources/new' element={<NewSource />} /> 
+            <Route path='/recipe_details' element={<RecipeDetails />} />
             <Route path='/' element={<Home />} />
           </Routes>
       </div>

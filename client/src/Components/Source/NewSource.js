@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createSource } from '../User/userSlice';
 import { useNavigate } from 'react-router-dom';
 
-function SourceForm() {
+function NewSource() {
 
   const [author, setAuthor] = useState('')
   const [email, setEmail] = useState('')
@@ -66,7 +66,7 @@ function SourceForm() {
   return (
     <div>
       <br></br>
-    <h3>Add Source</h3>
+    <h3>New Source</h3>
       <br></br>
       {sourceForm}
     </div>    
@@ -74,4 +74,4 @@ function SourceForm() {
 
 }
 
-export default SourceForm
+export default NewSource

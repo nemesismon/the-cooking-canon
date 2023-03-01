@@ -26,7 +26,7 @@ function Home() {
           <Container>
           <Row>
           <Col md={{ span: 1, offset: 2 }}>
-          <Card style={{ width: '18rem'}} onClick={() => navigate('/recipe_list')}>
+          <Card style={{ width: '18rem'}} onClick={() => navigate('/recipes')}>
             {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
             <Card.Body>
               <Card.Title>Recipes</Card.Title>
@@ -37,7 +37,7 @@ function Home() {
           </Card>
           </Col>
           <Col md={{ span: 0, offset: 4 }}>
-          <Card style={{ width: '18rem'}} onClick={() => navigate('/recipe_form')}>
+          <Card style={{ width: '18rem'}} onClick={() => navigate('/recipes/new')}>
             {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
             <Card.Body>
               <Card.Title>Create Recipe</Card.Title>
@@ -51,7 +51,7 @@ function Home() {
           <br></br>
           <Row>
           <Col md={{ span: 1, offset: 2 }}>
-          <Card style={{ width: '18rem'}} onClick={() => navigate('/source')}>
+          <Card style={{ width: '18rem'}} onClick={() => navigate('/sources')}>
             {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
             <Card.Body>
               <Card.Title>Sources</Card.Title>
@@ -61,7 +61,7 @@ function Home() {
             </Card.Body>
           </Card>
           </Col>
-          <Col md={{ span: 0, offset: 4 }} onClick={() => navigate('/source_form')}>
+          <Col md={{ span: 0, offset: 4 }} onClick={() => navigate('/sources/new')}>
           <Card style={{ width: '18rem'}}>
             {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
             <Card.Body>

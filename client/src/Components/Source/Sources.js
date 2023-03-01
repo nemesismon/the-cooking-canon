@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Card from 'react-bootstrap/Card'
 import { useNavigate } from "react-router-dom";
 
-function Source() {
+function Sources() {
 
   const sources = useSelector(state => state.user.user.sources)
   const state = useSelector(state => state)
@@ -12,13 +12,12 @@ function Source() {
 
   console.log(state)
 
-  const sourceLister = 
-    loginStatus ?
+  const sourceLister =
     sources !== undefined && JSON.stringify(sources) !== '[]' ?
     <>{sources.map((source) => {
       return (
         <div key={source.id}>
-            <Card style={{ width: '75rem' }}>
+            <Card className='mx-auto' style={{ width: '75rem' }}>
             {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
             <Card.Body>
               <Card.Title>{source.author}</Card.Title>
@@ -30,7 +29,6 @@ function Source() {
         </div>
       )
     })}</> : <div><h6>Add sources and assign them to recipes to see your list!</h6></div>
-    : navigate('/login')
 
   return (
     <div>
@@ -42,4 +40,4 @@ function Source() {
   )
 }
 
-export default Source
+export default Sources

@@ -4,17 +4,14 @@ import Card from 'react-bootstrap/Card'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 
-function FullRecipe() {
+function RecipeDetails() {
 
   const location = useLocation()
   const recipe = location.state.recipe
   const navigate = useNavigate()
 
-  // debugger
-  
-
   const handleGoBack = () => {
-    navigate('/recipe_list')
+    navigate('/recipes')
   }
 
   return (
@@ -22,7 +19,7 @@ function FullRecipe() {
       <br></br>
     <h4>Full Recipe</h4>
       <br></br>
-    <Card style={{ width: '75rem' }}>
+    <Card className='mx-auto' style={{ width: '75rem' }}>
       {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
       <Card.Body>
         <Card.Title><h1>Title: {recipe.name}</h1></Card.Title>
@@ -44,4 +41,4 @@ function FullRecipe() {
   )
 }
 
-export default FullRecipe
+export default RecipeDetails

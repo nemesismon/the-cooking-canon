@@ -10,7 +10,7 @@ import { createRecipe } from '../User/userSlice';
 import { kitchenMeasurementTypes } from '../Ingredient/data';
 import { useNavigate } from 'react-router-dom';
 
-function RecipeForm() {
+function NewRecipe() {
 
   const [name, setName] = useState('')
   const [meal_course, setMealCourse] = useState('')
@@ -185,11 +185,11 @@ function RecipeForm() {
   return (
     <div>
       <br></br>
-    <h3>Add Recipe</h3>
-      <button variant='secondary' onClick={() => navigate('/source_form')}>Need a new Source? - Click here!</button>
+    <h3>New Recipe</h3>
+      <button variant='secondary' onClick={() => navigate('/sources/new')}>Need a new Source? - Click here!</button>
       <br></br>
       {recipeForm}
     </div>)
 }
 
-export default RecipeForm
+export default NewRecipe

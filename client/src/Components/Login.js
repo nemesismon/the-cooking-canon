@@ -7,9 +7,8 @@ import Button from "react-bootstrap/esm/Button";
 import { createUser, userLogin, clearErrors } from './User/userSlice';
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Login({ login, setLogin }) {
 
-  const [login, setLogin] = useState(false)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [password_confirmation, setPasswordConfirmation] = useState('')
@@ -19,12 +18,7 @@ function Login() {
 
   const dispatch = useDispatch()
   const errors = useSelector(state => state.user.errors)
-  const loginStatus = useSelector(state => state.user.loginStatus)
   const navigate = useNavigate()
-
-  // if (loginStatus === true) {
-  //   navigate('/')
-  // }
 
   const handleFormToggle = () => {
     dispatch(clearErrors())
@@ -43,7 +37,10 @@ function Login() {
   const handleUserLogin = async (e) => {
     e.preventDefault()
       try {
-        await dispatch(userLogin({username, password})).unwrap()
+        const loginResponse = await dispatch(userLogin({username, password})).unwrap()
+            if (loginResponse !== null) {
+              navigate('/')
+            }
         } catch (err) {
         } finally {
           setUsername('')
@@ -54,7 +51,10 @@ function Login() {
   const userLoginCreate = () => {
       if (login === false) {
         const loginError = errors.length > 0 ? <p className='make_red'>{errors[0].message}</p> : null
-        return ( 
+        return (
+          <>
+          <br></br>
+          <h3>Login</h3>
           <div>
             <br></br>
             {loginError}
@@ -74,15 +74,19 @@ function Login() {
             </Form>
             <br></br>
             <p>Please Login or Create Account to get started</p>
-        </div> 
+        </div>
+        </>
         )
       } else {
         const createErrors = errors.length > 0 ? <p className='make_red'>{
-        errors.map((error) => {
-          return <li key={error}>{error}</li>
-        })}</p> : null
+          errors.map((error) => {
+            return <li key={error}>{error}</li>
+          })}</p> : null
 
         return (
+          <>
+          <br></br>
+          <h3>Create Account</h3>
           <div>
             {createErrors}
             <Form onSubmit={handleCreateUser}>
@@ -119,16 +123,14 @@ function Login() {
             <br></br>
             <p>Please Login or Create Account to get started</p>
           </div>
+          </>
         )}
     }
       
   return (
-    <>
-    <br></br>
-    <h3>Login</h3>
-    <br></br>
+    <div>
     {userLoginCreate()}
-    </>
+    </div>
   )
 }
 

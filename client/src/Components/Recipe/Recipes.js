@@ -4,8 +4,9 @@ import Button from 'react-bootstrap/Button'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { deleteRecipe } from '../User/userSlice';
+import '../../App.css';
 
-function Recipe() {
+function Recipes() {
 
   const user = useSelector(state => state.user.user)
   const loginStatus = useSelector(state => state.user.loginStatus)
@@ -13,7 +14,7 @@ function Recipe() {
   const dispatch = useDispatch()
 
   const recipeDetails = (recipe) => {
-    navigate('/full_recipe', {state:{recipe}})
+    navigate('/recipe_details', {state:{recipe}})
   }
 
   const handleRecipeDelete = (recipe) => {
@@ -26,9 +27,9 @@ function Recipe() {
         <>{user.recipes.map((recipe) => {
           return (
             <div key={recipe.id}>
-                <Card style={{ width: '75rem' }}>
+                <Card className='mx-auto' style={{ width: '75rem' }}>
                 {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
-                <Card.Body onClick={() => recipeDetails(recipe)}>
+                <Card.Body className='hover-effect' width onClick={() => recipeDetails(recipe)}>
                   <Card.Title>{recipe.name}</Card.Title>
                   <Card.Text>
                     Good For: {recipe.good_for}; &ensp; Diet: {recipe.diet_type}
@@ -45,11 +46,11 @@ function Recipe() {
   return (
     <div>
       <br></br>
-    <h3>Recipe List</h3>
+    <h3>Recipes</h3>
       <br></br>
       {recipeLister}
     </div>    
   )
 }
 
-export default Recipe
+export default Recipes
