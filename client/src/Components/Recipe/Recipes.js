@@ -21,27 +21,27 @@ function Recipes() {
     dispatch(deleteRecipe(recipe))
   }
 
-    const recipeLister = 
-      loginStatus ?
-      JSON.stringify(user) !== '{}' && user.recipes.length > 0 ?
-        <>{user.recipes.map((recipe) => {
-          return (
-            <div key={recipe.id}>
-                <Card className='mx-auto' style={{ width: '75rem' }}>
-                {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
-                <Card.Body className='hover-effect' width onClick={() => recipeDetails(recipe)}>
-                  <Card.Title>{recipe.name}</Card.Title>
-                  <Card.Text>
-                    Good For: {recipe.good_for}; &ensp; Diet: {recipe.diet_type}
-                  </Card.Text>
-                </Card.Body>
-                <Button variant='primary' onClick={() => handleRecipeDelete(recipe)}>Delete</Button>
-              </Card>
-              <br></br>
-            </div>
-          )
-        })}</> : <div><h6>Add some recipes!</h6></div>
-        : navigate('/login')
+  const recipeLister = 
+    loginStatus ?
+    JSON.stringify(user) !== '{}' && user.recipes.length > 0 ?
+      <>{user.recipes.map((recipe) => {
+        return (
+          <div key={recipe.id}>
+              <Card className='mx-auto' style={{ width: '75rem' }}>
+              {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
+              <Card.Body className='hover-effect' width onClick={() => recipeDetails(recipe)}>
+                <Card.Title>{recipe.name}</Card.Title>
+                <Card.Text>
+                  Good For: {recipe.good_for}; &ensp; Diet: {recipe.diet_type}
+                </Card.Text>
+              </Card.Body>
+              <Button variant='primary' onClick={() => handleRecipeDelete(recipe)}>Delete</Button>
+            </Card>
+            <br></br>
+          </div>
+        )
+      })}</> : <div><h6>Add some recipes!</h6></div>
+      : navigate('/login')
         
   return (
     <div>

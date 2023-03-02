@@ -7,17 +7,20 @@ function Sources() {
 
   const sources = useSelector(state => state.user.user.sources)
   const state = useSelector(state => state)
-  const loginStatus = useSelector(state => state.user.loginStatus)
   const navigate = useNavigate()
 
   console.log(state)
+
+  const handleSourceDetails = (source) => {
+    navigate('/source_recipes', {state:{source}})
+  }
 
   const sourceLister =
     sources !== undefined && JSON.stringify(sources) !== '[]' ?
     <>{sources.map((source) => {
       return (
         <div key={source.id}>
-            <Card className='mx-auto' style={{ width: '75rem' }}>
+            <Card className='mx-auto' style={{ width: '75rem' }} onClick={() => handleSourceDetails(source)}>
             {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
             <Card.Body>
               <Card.Title>{source.author}</Card.Title>

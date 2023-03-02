@@ -10,6 +10,7 @@ import NewRecipe from './Components/Recipe/NewRecipe';
 import RecipeDetails from './Components/Recipe/RecipeDetails';
 import Sources from './Components/Source/Sources';
 import NewSource from './Components/Source/NewSource';
+import SourceRecipes from './Components/Source/SourceRecipes';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from './Components/User/userSlice';
 import Logo from './Images/the-cooking-canon-logo.png'
@@ -43,13 +44,14 @@ function App() {
             <Route path='/recipes/new' element={<NewRecipe />} />
             <Route path='/recipes' element={<Recipes />} />
             <Route path='/sources' element={<Sources />} />
-            <Route path='/sources/new' element={<NewSource />} /> 
+            <Route path='/sources/new' element={<NewSource />} />
+            <Route path='/source_recipes' element={<SourceRecipes />} />
             <Route path='/recipe_details' element={<RecipeDetails />} />
             <Route path='/' element={<Home />} />
           </Routes>
       </div>
     </div>
-  );
+  )
 }
 
 export default App;

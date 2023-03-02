@@ -13,6 +13,13 @@ class RecipesController < ApplicationController
       render json: recipe, status: :ok
     end
 
+    def patch
+      recipe = @user.recipes.find_by!(id: params[:id])
+        noBlankParams = recipe_params.compact_blank
+        recipe.update!(noBlankParams)
+        render json: recipe, status: :accepted
+    end
+
     def destroy
       recipe = @user.recipes.find_by!(id: params[:id])
       recipe.delete

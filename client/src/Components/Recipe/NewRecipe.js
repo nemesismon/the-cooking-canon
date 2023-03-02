@@ -34,10 +34,6 @@ function NewRecipe() {
   const loginStatus = useSelector(state => state.user.loginStatus)
   const navigate = useNavigate()
 
-  console.log(ingredients)
-  console.log(user)
-  console.log(errors)
-
   useEffect(() => {
     fetch('/sources')
     .then(r => r.json())
@@ -160,10 +156,10 @@ function NewRecipe() {
               <Form.Control type='text' placeholder='Good For' value={good_for} onChange={e => setGoodFor(e.target.value)} />
             </FloatingLabel>
             <br></br>
-            <FloatingLabel label='Image'>
+            {/* <FloatingLabel label='Image'>
               <Form.Control type='img' placeholder='Image' value={image} onChange={e => setImage(e.target.value)} />
             </FloatingLabel>
-            <br></br>
+            <br></br> */}
             <FloatingLabel label='Instructions'>
               <Form.Control type='text' placeholder='Instructions' value={instructions} onChange={e => setInstructions(e.target.value)} />
             </FloatingLabel>

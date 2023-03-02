@@ -27,7 +27,6 @@ function Home() {
           <Row>
           <Col md={{ span: 1, offset: 2 }}>
           <Card style={{ width: '18rem'}} onClick={() => navigate('/recipes')}>
-            {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
             <Card.Body>
               <Card.Title>Recipes</Card.Title>
               <Card.Text>
@@ -38,7 +37,6 @@ function Home() {
           </Col>
           <Col md={{ span: 0, offset: 4 }}>
           <Card style={{ width: '18rem'}} onClick={() => navigate('/recipes/new')}>
-            {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
             <Card.Body>
               <Card.Title>Create Recipe</Card.Title>
               <Card.Text>
@@ -52,7 +50,6 @@ function Home() {
           <Row>
           <Col md={{ span: 1, offset: 2 }}>
           <Card style={{ width: '18rem'}} onClick={() => navigate('/sources')}>
-            {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
             <Card.Body>
               <Card.Title>Sources</Card.Title>
               <Card.Text>
@@ -63,7 +60,6 @@ function Home() {
           </Col>
           <Col md={{ span: 0, offset: 4 }} onClick={() => navigate('/sources/new')}>
           <Card style={{ width: '18rem'}}>
-            {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
             <Card.Body>
               <Card.Title>Create Source</Card.Title>
               <Card.Text>
