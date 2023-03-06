@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   
   resources :ingredients
-  resources :sources, only: [:create, :index]
-  resources :recipes, only: [:index, :show, :create, :patch, :destroy]
+  resources :sources, only: [:create, :index, :show]
+  resources :recipes, only: [:index, :show, :create, :update, :destroy]
   resources :users, only: [:create, :show]
 
   get '/me', to: 'sessions#show'

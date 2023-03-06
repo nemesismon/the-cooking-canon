@@ -10,14 +10,20 @@ class RecipesController < ApplicationController
           Ingredient.create!(amount: ingredient[:amount], unit: ingredient[:unit], name: ingredient[:name], preparation: ingredient[:preparation], recipe_id: recipe.id)
         end
         recipe.ingredients = recipeItems
-      render json: recipe, status: :ok
+      render json: recipe, status: :accepted
     end
 
-    def patch
+    def index
+      source = Source.find_by!(id: params[:source_id])
+      render json: source.recipes, status: :ok
+    end
+
+    def update
       recipe = @user.recipes.find_by!(id: params[:id])
-        noBlankParams = recipe_params.compact_blank
-        recipe.update!(noBlankParams)
-        render json: recipe, status: :accepted
+        noBlankParamsArr = recipe_params.compact_blank
+        # byebug
+        recipe.update!(noBlankParamsArr)
+        render json: @user.recipes, status: :accepted
     end
 
     def destroy
@@ -33,7 +39,7 @@ class RecipesController < ApplicationController
     end
 
     def recipe_params
-      params.require(:recipe).permit(:name, :meal_course, :cook_vessel, :diet_type, :good_for, :image, :instructions, :notes, :source_id, ingredients: [:amount, :unit, :name, :preparation])
+      params.require(:recipe).permit(:id, :name, :meal_course, :cook_vessel, :diet_type, :good_for, :image, :instructions, :notes, :source_id, ingredients: [:amount, :unit, :name, :preparation])
     end
 
     def render_record_not_found

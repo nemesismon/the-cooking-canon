@@ -1,49 +1,49 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function SourceRecipes() {
+function SourceRecipes({ setDetailRecipeID }) {
 
-  const location = useLocation()
   const navigate = useNavigate()
-  const state = useSelector(state => state)
+  const location = useLocation()
+  const currentSource = location.state.source
+  const recipes = useSelector(state => state.user.user.recipes)
 
-// WILL REQUIRE CALL TO USERSLICE FOR RECIPES ADDED TO SOURCE PHYSICALLY
-
-  debugger
+  const recipeDetails = (recipe) => {
+    setDetailRecipeID(recipe.id)
+    navigate('/recipe_details')
+  }
 
   const recipeLister = () => {
-    const source = location.state.source
-    console.log(source)
-
-    debugger
-    if (JSON.stringify(source) !== null){
-      return source.recipes.map((recipe) => {
-          return (
-            <div key={recipe.id}>
-              <Card className='mx-auto' style={{ width: '75rem' }}>
-              {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
-              <Card.Body className='hover-effect' width >
-                <Card.Title>{recipe.name}</Card.Title>
-                <Card.Text>
-                  Good For: {recipe.good_for}; &ensp; Diet: {recipe.diet_type}
-                </Card.Text>
-              </Card.Body>
-            </Card>
-            <br></br>
-          </div>
-  )})}}
-
+    if (recipes !== undefined) {
+    return recipes.map(recipe => {
+      if (recipe.source_id === currentSource.id) {
+      return (
+        <div key={recipe.id}>
+          <Card className='mx-auto' style={{ width: '75rem' }}>
+          <Card.Body className='hover-effect' onClick={() => recipeDetails(recipe)}>
+            <Card.Title>{recipe.name}</Card.Title>
+            <Card.Text>
+              Good For: {recipe.good_for}; &ensp; Diet: {recipe.diet_type}
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        <br></br>
+      </div>
+    )}
+  })
+  } return recipes
+}
 
   return (
     <div>
         <br></br>
-      <h3>### Recipes</h3>
+      <h3>{currentSource.author}'s Recipes</h3>
         <br></br>
-        {recipeLister}
-        <Button onClick={() => navigate('/sources')}>Back</Button>
+        {recipeLister()}
+        <Button onClick={() => (navigate('/sources'))}>Back</Button>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { useState } from 'react';
 import './App.css';
 import NavBar from './Components/NavBar';
@@ -19,11 +19,15 @@ function App() {
 
   const [fetchRun, setFetchRun] = useState(false)
   const [login, setLogin] = useState(false)
+  const [detailRecipeID, setDetailRecipeID] = useState('')
 
   const dispatch = useDispatch()
   const loginStatus = useSelector(state => state.user.loginStatus)
+  const user = useSelector(state => state.user.user)
+  const recipes = useSelector(state => state.user.user.recipes)
 
-  console.log(loginStatus)
+  console.log(user)
+  console.log(recipes)
 
   if (fetchRun === false) {
     dispatch(fetchUser()).unwrap()
@@ -35,18 +39,18 @@ function App() {
   return (
     <div className='App'>
       <header className='App-header'>
-        <img height='100px' src={Logo}/>
+        <img height='100px' alt='logo' src={Logo}/>
       </header>
       <div>
         {navBarToggle}
           <Routes>
             <Route path='/login' element={<Login login={login} setLogin={setLogin}/>} />
             <Route path='/recipes/new' element={<NewRecipe />} />
-            <Route path='/recipes' element={<Recipes />} />
+            <Route path='/recipes' element={<Recipes setDetailRecipeID={setDetailRecipeID}/>} />
             <Route path='/sources' element={<Sources />} />
             <Route path='/sources/new' element={<NewSource />} />
-            <Route path='/source_recipes' element={<SourceRecipes />} />
-            <Route path='/recipe_details' element={<RecipeDetails />} />
+            <Route path='/source_recipes' element={<SourceRecipes setDetailRecipeID={setDetailRecipeID}/>} />
+            <Route path='/recipe_details' element={<RecipeDetails detailRecipeID={detailRecipeID}/>} />
             <Route path='/' element={<Home />} />
           </Routes>
       </div>

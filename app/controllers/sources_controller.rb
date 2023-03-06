@@ -21,6 +21,15 @@ class SourcesController < ApplicationController
     end
   end
 
+  def show
+    source = Source.find_by(id: params[:id])
+      if source
+        render json: source, status: :ok
+      else
+        render json: { error: 'No record found'}
+      end
+  end
+
   private
 
   def source_params

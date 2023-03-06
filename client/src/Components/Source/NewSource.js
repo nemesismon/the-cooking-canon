@@ -21,10 +21,13 @@ function NewSource() {
   const handleSourceSubmit = async (e) => {
     e.preventDefault()
     try{
-      await dispatch(createSource({author, email, phone, birthday})).unwrap()
+      const data = await dispatch(createSource({author, email, phone, birthday})).unwrap()
+      if (data.id > 0) {
+        setAuthor(''); setEmail(''); setPhone(''); setBirthday('');
+        navigate('/recipes')
+      }
     } catch(err) {
     } finally {
-      setAuthor(''); setEmail(''); setPhone(''); setBirthday('');
     }
   }
 

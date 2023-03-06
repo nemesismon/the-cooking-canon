@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Nav from 'react-bootstrap/Nav'
 import Navbar from "react-bootstrap/Navbar"
-// import Button from 'react-bootstrap/Button'
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from './User/userSlice';
 import { useNavigate } from "react-router-dom";

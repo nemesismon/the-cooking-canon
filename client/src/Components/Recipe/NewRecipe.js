@@ -29,7 +29,7 @@ function NewRecipe() {
   const [sourceData, setSourceData] = useState([])
 
   const dispatch = useDispatch()
-  const user = useSelector(state => state.user.user)
+  // const user = useSelector(state => state.user.user)
   const errors = useSelector(state => state.user.errors)
   const loginStatus = useSelector(state => state.user.loginStatus)
   const navigate = useNavigate()

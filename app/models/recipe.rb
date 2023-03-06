@@ -7,7 +7,7 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :ingredients
   # validates_associated :ingredients
 
-  validates :name, length: { minimum: 3 }
+  validates :name, length: { minimum: 3 }, uniqueness: true
   validates :meal_course, presence: true
   validates :cook_vessel, presence: true
   validates :diet_type, presence: true

@@ -75,7 +75,7 @@ export const createRecipe = createAsyncThunk(
 export const updateRecipe = createAsyncThunk(
   'user/updateRecipe',
     async (recipeUpdateData) => {
-      const response = await fetch('/recipes', {
+      const response = await fetch(`/recipes/${recipeUpdateData.id}`, {
         method: 'PATCH',
         headers: { 'Content-type': 'application/json'},
         body: JSON.stringify(recipeUpdateData),
@@ -84,6 +84,7 @@ export const updateRecipe = createAsyncThunk(
       if (!response.ok){
         throw new Error(data.errors)
       }
+      // debugger
       return data
     }
 )
@@ -164,12 +165,11 @@ const userSlice = createSlice({
       state.errors = tempArray
     })
     builder.addCase(updateRecipe.fulfilled, (state, action) => {
-      debugger
       state.errors = []
-      state.user.recipes.update()
-    })
+      state.user.recipes = action.payload
+      })
     builder.addCase(updateRecipe.rejected, (state, action) => {
-      // debugger
+      debugger
       state.errors = []
       const tempString = action.error.message
       const tempArray = tempString.split(',')

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { deleteRecipe } from '../User/userSlice';
 import '../../App.css';
 
-function Recipes() {
+function Recipes({ setDetailRecipeID }) {
 
   const user = useSelector(state => state.user.user)
   const loginStatus = useSelector(state => state.user.loginStatus)
@@ -14,7 +14,8 @@ function Recipes() {
   const dispatch = useDispatch()
 
   const recipeDetails = (recipe) => {
-    navigate('/recipe_details', {state:{recipe}})
+    setDetailRecipeID(recipe.id)
+    navigate('/recipe_details')
   }
 
   const handleRecipeDelete = (recipe) => {
@@ -29,7 +30,7 @@ function Recipes() {
           <div key={recipe.id}>
               <Card className='mx-auto' style={{ width: '75rem' }}>
               {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
-              <Card.Body className='hover-effect' width onClick={() => recipeDetails(recipe)}>
+              <Card.Body className='hover-effect' onClick={() => recipeDetails(recipe)}>
                 <Card.Title>{recipe.name}</Card.Title>
                 <Card.Text>
                   Good For: {recipe.good_for}; &ensp; Diet: {recipe.diet_type}
