@@ -31,19 +31,19 @@ function NavBar() {
   const nav = 
     <ul class='nav nav-tabs'>
       <li class='nav-item'>
-          <a class='nav-link active' aria-current='page' href='#'>Home</a>
+          <a class='nav-link active' aria-current='page'>Home</a>
       </li>
       <li class='nav-item'>
-        <a class='nav-link' href='#'>Recipes</a>
+        <a class='nav-link' >Recipes</a>
       </li>
       <li class='nav-item'> 
-        <a class='nav-link' href='#'>New Recipe</a>
+        <a class='nav-link' >New Recipe</a>
       </li>
       <li class='nav-item'>
-        <a class='nav-link' href='#'>Sources</a>
+        <a class='nav-link' >Sources</a>
       </li>
       <li class='nav-item'>
-        <a class='nav-link' href='#'>New Source</a>
+        <a class='nav-link' >New Source</a>
       </li>
       {buttonToggle}
     </ul>
