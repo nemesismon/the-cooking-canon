@@ -28,7 +28,10 @@ function Login({ login, setLogin }) {
   const handleCreateUser = async (e) => {
     e.preventDefault()
     try {
-      await dispatch(createUser({username, password, password_confirmation, email, phone, birthday})).unwrap()
+      const createResponse = await dispatch(createUser({username, password, password_confirmation, email, phone, birthday})).unwrap()
+      if (createResponse !== null) {
+        navigate('/')
+      }
     } catch(err) {
     } finally {
     }

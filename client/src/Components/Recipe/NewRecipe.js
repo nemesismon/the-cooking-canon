@@ -47,6 +47,7 @@ function NewRecipe() {
         console.log(recipe)
         if (recipe.id > 0) {
           setName(''); setMealCourse(''); setCookVessel(''); setDietType(''); setGoodFor(''); setImage(''); setInstructions(''); setIngredients(''); setNotes(''); setSourceID();
+          navigate('/recipes')
         }
       } 
       catch(err) {
