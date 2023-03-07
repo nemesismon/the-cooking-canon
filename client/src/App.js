@@ -23,11 +23,6 @@ function App() {
 
   const dispatch = useDispatch()
   const loginStatus = useSelector(state => state.user.loginStatus)
-  const user = useSelector(state => state.user.user)
-  const recipes = useSelector(state => state.user.user.recipes)
-
-  console.log(user)
-  console.log(recipes)
 
   if (fetchRun === false) {
     dispatch(fetchUser()).unwrap()

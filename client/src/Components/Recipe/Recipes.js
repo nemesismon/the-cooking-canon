@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import { useSelector, useDispatch } from 'react-redux';
@@ -27,8 +27,8 @@ function Recipes({ setDetailRecipeID }) {
     JSON.stringify(user) !== '{}' && user.recipes.length > 0 ?
       <>{user.recipes.map((recipe) => {
         return (
-          <div key={recipe.id}>
-              <Card className='mx-auto' style={{ width: '75rem' }}>
+          <div>
+              <Card key={recipe.id} className='mx-auto' style={{ width: '75rem' }}>
               {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
               <Card.Body className='hover-effect' onClick={() => recipeDetails(recipe)}>
                 <Card.Title>{recipe.name}</Card.Title>

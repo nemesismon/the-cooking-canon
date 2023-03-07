@@ -6,9 +6,9 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
-import Container from 'react-bootstrap/Container'
+// import Container from 'react-bootstrap/Container'
 import { useDispatch, useSelector } from 'react-redux';
-import { kitchenMeasurementTypes } from '../Ingredient/data';
+// import { kitchenMeasurementTypes } from '../Ingredient/data';
 import { updateRecipe } from '../User/userSlice';
 
 function RecipeDetails({ detailRecipeID }) {
@@ -23,10 +23,10 @@ function RecipeDetails({ detailRecipeID }) {
   const [notes, setNotes] = useState('')
   const [ingredients, setIngredients] = useState([])
   const [source_id, setSourceID] = useState()
-  const [amount, setAmount] = useState('')
-  const [unit, setUnit] = useState('')
-  const [ingName, setIngName] = useState('')
-  const [preparation, setPreparation] = useState('')
+  // const [amount, setAmount] = useState('')
+  // const [unit, setUnit] = useState('')
+  // const [ingName, setIngName] = useState('')
+  // const [preparation, setPreparation] = useState('')
   const [sourceData, setSourceData] = useState([])
   const [editToggle, setEditToggle] = useState(false)
 
@@ -42,9 +42,6 @@ function RecipeDetails({ detailRecipeID }) {
     .then(data => {
       setSourceData(data)
     })}, [])
-
-    console.log(recipes)
-    console.log(detailRecipeID)
 
   const handleGoBack = () => {
     navigate('/recipes')
@@ -71,7 +68,7 @@ function RecipeDetails({ detailRecipeID }) {
 
   const sourceSelector = () => {
       const currentSources = sourceData.map(source => 
-        <option key={source.id} value={source.id}>{source.author}</option>)
+        <option key={source.author} value={source.id}>{source.author}</option>)
     return (
       <Form.Select onChange={e => setSourceID(e.target.value)}>
         <option>Select Source</option>
@@ -80,86 +77,82 @@ function RecipeDetails({ detailRecipeID }) {
     )
   }
 
-  const unitSelector = () => {
-    const currentUnit = kitchenMeasurementTypes.map(type => 
-      <option key={type.value} value={type.value} >{type.label}</option>)
+  // const unitSelector = () => {
+  //   const currentUnit = kitchenMeasurementTypes.map(type => 
+  //     <option key={type.value} value={type.value} >{type.label}</option>)
+  //       return (
+  //         <Form.Select aria-label='Unit select' onChange={e => setUnit(e.target.value)}>
+  //           <option>Select Source</option>
+  //           {currentUnit}
+  //         </Form.Select>
+  // )
+  // }
 
-  return (
-    <Form.Select aria-label='Unit select' onChange={e => setUnit(e.target.value)}>
-      <option>Select Source</option>
-      {currentUnit}
-    </Form.Select>
-  )
-  }
+  // const ingredientRow = () => {
+  //   return (
+  //     <Container>
+  //     <Form.Group>
+  //     <Row xs='auto'>
+  //       <Col align='left'>
+  //         <FloatingLabel label='Amount'>
+  //           <Form.Control type='integer' placeholder='Amount' value={amount} onChange={e => setAmount(e.target.value)} />
+  //         </FloatingLabel>
+  //       </Col>
+  //       <Col align='left'>
+  //         {unitSelector()}
+  //       </Col>
+  //       <Col align='left'>
+  //         <FloatingLabel label='Ingredient'>
+  //           <Form.Control type='text' placeholder='Ingredient' value={ingName} onChange={e => setIngName(e.target.value)} />
+  //         </FloatingLabel>
+  //       </Col>
+  //       <Col align='left'>
+  //         <FloatingLabel label='Preparation'>
+  //           <Form.Control type='text' placeholder='Preparation' value={preparation} onChange={e => setPreparation(e.target.value)} />
+  //         </FloatingLabel>
+  //       </Col>
+  //       <br></br>
+  //       <Button onClick={() => handleAddIngredient()}>Add Ingredient</Button>
+  //     </Row>
+  //     </Form.Group>
+  //     </Container>
+  //   )
+  // }
 
-  const ingredientRow = () => {
-    return (
-      <Container>
-      <Form.Group>
-      <Row xs='auto'>
-        <Col align='left'>
-          <FloatingLabel label='Amount'>
-            <Form.Control type='integer' placeholder='Amount' value={amount} onChange={e => setAmount(e.target.value)} />
-          </FloatingLabel>
-        </Col>
-        <Col align='left'>
-          {unitSelector()}
-        </Col>
-        <Col align='left'>
-          <FloatingLabel label='Ingredient'>
-            <Form.Control type='text' placeholder='Ingredient' value={ingName} onChange={e => setIngName(e.target.value)} />
-          </FloatingLabel>
-        </Col>
-        <Col align='left'>
-          <FloatingLabel label='Preparation'>
-            <Form.Control type='text' placeholder='Preparation' value={preparation} onChange={e => setPreparation(e.target.value)} />
-          </FloatingLabel>
-        </Col>
-        <br></br>
-        <Button onClick={() => handleAddIngredient()}>Add Ingredient</Button>
-      </Row>
-      </Form.Group>
-      </Container>
-    )
-  }
-
-  const handleAddIngredient = () => {
-    const tempIngObject = {amount: amount, unit: unit, name: ingName, preparation: preparation}
-    ingredients.push(tempIngObject)
-    setIngredients([...ingredients])
-    setAmount(''); setUnit(''); setIngName(''); setPreparation('');
-  }
+  // const handleAddIngredient = () => {
+  //   const tempIngObject = {amount: amount, unit: unit, name: ingName, preparation: preparation}
+  //   ingredients.push(tempIngObject)
+  //   setIngredients([...ingredients])
+  //   setAmount(''); setUnit(''); setIngName(''); setPreparation('');
+  // }
 
   const existingIngredients = (exIngred) => {
     return exIngred.length > 0 ?
       exIngred.map(ingred => {
-        return (<Col md={{ span: 8, offset: 1 }} align='left'><li key={ingred.id}>{ingred.amount} {ingred.unit} {ingred.name} {ingred.preparation}</li></Col>)
+        return (<Col md={{ span: 8, offset: 1 }} align='left'><li key={ingred.name}>{ingred.amount} {ingred.unit} {ingred.name} {ingred.preparation}</li></Col>)
       }) : null
     }
 
-  const activeIngredients = 
-    ingredients.length > 0 ? 
-      ingredients.map(ingredient => { 
-        return (<Col md={{ span: 8, offset: 1 }} align='left'><li key={ingredient.id}>{ingredient.amount} {ingredient.unit} {ingredient.name} {ingredient.preparation}</li></Col>
-      )}) : null
+  // const activeIngredients = 
+  //   ingredients.length > 0 ? 
+  //     ingredients.map(ingredient => { 
+  //       return (<Col md={{ span: 8, offset: 1 }} align='left'><li key={ingredient.name}>{ingredient.amount} {ingredient.unit} {ingredient.name} {ingredient.preparation}</li></Col>
+  //     )}) : null
 
-  const errDisplay = JSON.stringify(errors) !== '[]' ? <p className='make_red'>{
+  const errDisplay = JSON.stringify(errors) !== '[]' ? <div className='make_red'>{
     errors.map(error => {
       return <li key={error}>{error}</li>
-    })}</p> : null
+    })}</div> : null
 
-    console.log(recipes)
   const handleDetailsEdit = () => {
     if (JSON.stringify(user) !== '{}' && detailRecipeID > 0) {
     return recipes.map(recipe => {
         if (recipe.id === detailRecipeID){
-          // debugger
         return editToggle ?
-        
         <div>
           <div>
             <br></br>
-            <h3>Editing: {recipe.name}</h3>
+            <h3 key={recipe.name}>Editing: {recipe.name}</h3>
           </div> 
           {errDisplay}
           <Form onSubmit={handleUpdateRecipe}>
@@ -252,7 +245,7 @@ function RecipeDetails({ detailRecipeID }) {
         </div> : // <---------------------------- OR IS HERE!!!
             <div>
             <br></br>    
-          <h3>{recipe.name}</h3>
+          <h3 key={recipe.name}>{recipe.name}</h3>
             <br></br>
           <Card className='mx-auto' style={{ width: '75rem' }}>
             <Card.Header>
