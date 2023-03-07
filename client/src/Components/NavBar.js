@@ -29,21 +29,21 @@ function NavBar() {
     <div> &ensp; <button onClick={handleLogout} variant='secondary'>Logout, {state.user.username}</button></div> : null
 
   const nav = 
-    <ul class='nav nav-tabs'>
+    <ul class='nav nav-tabs' align='center'>
       <li class='nav-item'>
-          <a class='nav-link active' aria-current='page'>Home</a>
+          <a class='nav-link active' aria-current='page' href='/'>Home</a>
       </li>
       <li class='nav-item'>
-        <a class='nav-link' >Recipes</a>
+        <a class='nav-link' href='recipes'>Recipes</a>
       </li>
       <li class='nav-item'> 
-        <a class='nav-link' >New Recipe</a>
+        <a class='nav-link' href='recipes/new'>New Recipe</a>
       </li>
       <li class='nav-item'>
-        <a class='nav-link' >Sources</a>
+        <a class='nav-link' href='sources'>Sources</a>
       </li>
       <li class='nav-item'>
-        <a class='nav-link' >New Source</a>
+        <a class='nav-link' href='sources/new'>New Source</a>
       </li>
       {buttonToggle}
     </ul>
