@@ -1,56 +1,57 @@
-FlatIron P5 Project
+FlatIron P5 Capstone Project
 
 -> Application Name: The Cooking Canon
 
--> Description: Create a front and back end using React and Rails to produce a full web application. The purpose of the application is to allow users to create, read, update, and delete punch items, as well as see all projects they currently have active tasks on. Users can create accounts and will have authorizations and authentications to ensure only they have access to their data.
+-> Description: Create a front and back end using React and Rails to produce a full web application. Additionally, inclusions of Redux with Thunk middleware to handle state and the nested_attributes macro for nested form creation.  The purpose of the application is to allow users to create, read, update, and delete recipes, include ingredients, and even provide a source/author.
 
 -> Installation:
-bundle install
-npm install --prefix client
+  bundle install
+  npm install --prefix client
 
 -> Database Preperation:
-rails db:drop
-rails db:create
-rails db:migrate
+  rails db:drop
+  rails db:create
+  rails db:migrate
 
 -> Seeds
-Uncomment out desired lines in seeds.rb
-rails db:seed
+  Uncomment out desired lines in seeds.rb
+  rails db:seed
 
--> Run Application:
-rails s
-npm start --prefix client
-
--> Deploying:
+-> Run Application Locally:
+  rails s
+  npm start --prefix client
 
 -> Using Application
-Complete user signup
-Before populating any Punch Items, navigate to Projects and create at least one project
-User can then go back to Punch Items and create items
-Active items can be updated and deleted by the user only
-Projects show user all projects their items are associated with
+  -Complete user signup
+  -Before populating any Recipes, navigate to Add Source and create at least one author
+    --Source becomes available to all users for creating their own recipes
+  -User can then go back to Recipes and create items including the author assignment here and the ingredients
+  -Recipes can be updated and deleted by the user only
+  -Source shows the user all of the Sources that are assigned to the recipes they created
 
 -> Goals
-Use Rails backend with a React front end
-Proper RESTful routing
-Use authentication to persist sessions
-Include pertinent models for: a. one many-to-many b. join table c. implement associations
-Seperation of Concerns -> backend does work, frontend is show
-Full CRUD on a model
-Client side routing
-Implement authentication/authorization
+  -Include a many to many relationship
+  -Implement a minimum of 4 models
+  -Implement a minimum of 5 client side routes using React router
+  -Implement password protection and authentication
+  -Install full CRUD on at least 1 model, following REST conventions
+  -Implement validations and error handling
+  -Implement Redux with Thunk
+  -Implement acception of nested attributes
 
 -> Challenges
-Ensuring that updates will work with missing data in both database and state
-Filtering duplicates of contractors with many punch items to one project
-Finding multiple conditions that work for render changes without getting lost in loops
-Ability to show pertinent errors to the user
+  -Redux with Thunk boilerplate setup
+  -Implementation of nested attributes
+  -Finding easy ways to keep track of items without creating additional state
+  -Deploying to Render
 
 -> Contact/Support: michael.w.kolb@gmail.com
 
 -> Roadmap:
-Build metrics for early or overdue projects
-Additional project views
+  -Birthday reminders
+  -Recipes by ingredient
+  -Sharing recipes with other users
+  -Metrics to suggest recipes that have not recently or ever used
 
 -> Authors and Acknowledgment: A big thank you to the FlatIron School and even more so to all the contributors and authors for their hard work on the tools and libraries required for the production of this application!
 

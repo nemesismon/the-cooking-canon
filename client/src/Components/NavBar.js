@@ -29,46 +29,44 @@ function NavBar() {
     <div> &ensp; <button onClick={handleLogout} variant='secondary'>Logout, {state.user.username}</button></div> : null
 
   const nav = 
-    <ul class='nav nav-tabs' variant='dark' bg='dark'>
-      <li class='nav-item'>
-          <a class='nav-link active' aria-current='page' href='/'>Home</a>
-      </li>
-      <li class='nav-item'>
-        <a class='nav-link' href='recipes'>Recipes</a>
-      </li>
-      <li class='nav-item'> 
-        <a class='nav-link' href='recipes/new'>New Recipe</a>
-      </li>
-      <li class='nav-item'>
-        <a class='nav-link' href='sources'>Sources</a>
-      </li>
-      <li class='nav-item'>
-        <a class='nav-link' href='sources/new'>New Source</a>
-      </li>
-      {buttonToggle}
-    </ul>
-    // <Navbar className='justify-content-center' bg='dark' variant='dark'>
-    //   <Container>
-    //   <Nav fill variant='tabs' defaultActiveKey='/'>
-    //     <Nav.Item>
-    //       <Nav.Link href='/'>Home</Nav.Link>
-    //     </Nav.Item>
-    //     <Nav.Item>
-    //       <Nav.Link href='#recipes'>Recipes</Nav.Link>
-    //     </Nav.Item>
-    //     <Nav.Item>
-    //       <Nav.Link href='#recipes/new'>New Recipe</Nav.Link>
-    //     </Nav.Item>
-    //     <Nav.Item>
-    //       <Nav.Link href='#sources'>Sources</Nav.Link>
-    //     </Nav.Item>
-    //     <Nav.Item>
-    //       <Nav.Link href='#sources/new'>New Source</Nav.Link>
-    //     </Nav.Item>
-    //   </Nav>
-    // {buttonToggle}
-    // </Container>
-    // </Navbar>
+    // <ul class='nav nav-tabs' variant='dark' bg='dark'>
+    //   <li class='nav-item'>
+    //       <a class='nav-link active' aria-current='page' href='/'>Home</a>
+    //   </li>
+    //   <li class='nav-item'>
+    //     <a class='nav-link' href='recipes'>Recipes</a>
+    //   </li>
+    //   <li class='nav-item'> 
+    //     <a class='nav-link' href='recipes/new'>New Recipe</a>
+    //   </li>
+    //   <li class='nav-item'>
+    //     <a class='nav-link' href='sources'>Sources</a>
+    //   </li>
+    //   <li class='nav-item'>
+    //     <a class='nav-link' href='sources/new'>New Source</a>
+    //   </li>
+    //   {buttonToggle}
+    // </ul>
+    <Navbar className='justify-content-center' bg='dark' variant='dark'>
+      <Nav fill variant='tabs' >
+        <Nav.Item>
+          <Nav.Link href='/'>Home</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link href='recipes'>Recipes</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link href='recipes/new'>New Recipe</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link href='sources'>Sources</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link href='sources/new'>New Source</Nav.Link>
+        </Nav.Item>
+      </Nav>
+    {buttonToggle}
+    </Navbar>
 
   return (
     <div>
