@@ -29,7 +29,7 @@ function NavBar() {
     <div> &ensp; <button onClick={handleLogout} variant='secondary'>Logout, {state.user.username}</button></div> : null
 
   const nav = 
-    <ul class='nav nav-tabs' align='center'>
+    <ul class='nav nav-tabs' variant='dark' bg='dark'>
       <li class='nav-item'>
           <a class='nav-link active' aria-current='page' href='/'>Home</a>
       </li>

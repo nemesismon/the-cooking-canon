@@ -14,9 +14,9 @@ function Home() {
   const loginStatus = useSelector(state => state.user.loginStatus)
   const navigate = useNavigate()
 
-  console.log(state.user)
-  console.log(errors)
-  console.log(loginStatus)
+  // console.log(state.user)
+  // console.log(errors)
+  // console.log(loginStatus)
   
   const homeMenu = 
     loginStatus ?
