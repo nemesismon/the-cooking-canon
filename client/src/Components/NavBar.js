@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import Container from 'react-bootstrap/Container'
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogout } from './User/userSlice';
 import { useNavigate } from 'react-router-dom';
@@ -28,26 +29,46 @@ function NavBar() {
     <div> &ensp; <button onClick={handleLogout} variant='secondary'>Logout, {state.user.username}</button></div> : null
 
   const nav = 
-    <Navbar className='justify-content-center' bg='dark' variant='dark'>
-      <Nav fill variant='tabs' defaultActiveKey='/'>
-        <Nav.Item>
-          <Nav.Link href='/'>Home</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href='#recipes'>Recipes</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href='#recipes/new'>New Recipe</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href='#sources'>Sources</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href='#sources/new'>New Source</Nav.Link>
-        </Nav.Item>
-      </Nav>
-    {buttonToggle}
-    </Navbar>
+    <ul class='nav nav-tabs'>
+      <li class='nav-item'>
+          <a class='nav-link active' aria-current='page' href='#'>Home</a>
+      </li>
+      <li class='nav-item'>
+        <a class='nav-link' href='#'>Recipes</a>
+      </li>
+      <li class='nav-item'> 
+        <a class='nav-link' href='#'>New Recipe</a>
+      </li>
+      <li class='nav-item'>
+        <a class='nav-link' href='#'>Sources</a>
+      </li>
+      <li class='nav-item'>
+        <a class='nav-link' href='#'>New Source</a>
+      </li>
+      {buttonToggle}
+    </ul>
+    // <Navbar className='justify-content-center' bg='dark' variant='dark'>
+    //   <Container>
+    //   <Nav fill variant='tabs' defaultActiveKey='/'>
+    //     <Nav.Item>
+    //       <Nav.Link href='/'>Home</Nav.Link>
+    //     </Nav.Item>
+    //     <Nav.Item>
+    //       <Nav.Link href='#recipes'>Recipes</Nav.Link>
+    //     </Nav.Item>
+    //     <Nav.Item>
+    //       <Nav.Link href='#recipes/new'>New Recipe</Nav.Link>
+    //     </Nav.Item>
+    //     <Nav.Item>
+    //       <Nav.Link href='#sources'>Sources</Nav.Link>
+    //     </Nav.Item>
+    //     <Nav.Item>
+    //       <Nav.Link href='#sources/new'>New Source</Nav.Link>
+    //     </Nav.Item>
+    //   </Nav>
+    // {buttonToggle}
+    // </Container>
+    // </Navbar>
 
   return (
     <div>
