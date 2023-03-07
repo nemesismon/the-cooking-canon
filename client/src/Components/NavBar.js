@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 import Nav from 'react-bootstrap/Nav'
-import Navbar from "react-bootstrap/Navbar"
-import { useDispatch, useSelector } from "react-redux";
+import Navbar from 'react-bootstrap/Navbar'
+import { useDispatch, useSelector } from 'react-redux';
 import { userLogout } from './User/userSlice';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function NavBar() {
 
@@ -28,22 +28,22 @@ function NavBar() {
     <div> &ensp; <button onClick={handleLogout} variant='secondary'>Logout, {state.user.username}</button></div> : null
 
   const nav = 
-    <Navbar className="justify-content-center" bg="dark" variant="dark">
-      <Nav fill variant="tabs" >
+    <Navbar className='justify-content-center' bg='dark' variant='dark'>
+      <Nav fill variant='tabs' defaultActiveKey='/'>
         <Nav.Item>
-          <Nav.Link href="/">Home</Nav.Link>
+          <Nav.Link href='/'>Home</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey={navigate('/recipes')}>Recipes</Nav.Link>
+          <Nav.Link eventKey='recipes'>Recipes</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey={navigate('/recipes/new')}>New Recipe</Nav.Link>
+          <Nav.Link eventKey='recipes/new'>New Recipe</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey={navigate('/sources')}>Sources</Nav.Link>
+          <Nav.Link eventKey='sources'>Sources</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey={navigate('/sources/new')}>New Source</Nav.Link>
+          <Nav.Link eventKey='sources/new'>New Source</Nav.Link>
         </Nav.Item>
       </Nav>
     {buttonToggle}
