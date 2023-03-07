@@ -28,7 +28,7 @@ function Home() {
           <Col md={{ span: 1, offset: 2 }}>
           <Card style={{ width: '18rem'}} onClick={() => navigate('/recipes')}>
             <Card.Body>
-              <Card.Title>Recipes</Card.Title>
+              <Card.Title>Recipes ({state.user.recipes.length})</Card.Title>
               <Card.Text>
                 View Recipes
               </Card.Text>
@@ -38,7 +38,7 @@ function Home() {
           <Col md={{ span: 0, offset: 4 }}>
           <Card style={{ width: '18rem'}} onClick={() => navigate('/recipes/new')}>
             <Card.Body>
-              <Card.Title>Create Recipe</Card.Title>
+              <Card.Title>Create Recipe +</Card.Title>
               <Card.Text>
                 Add Recipe
               </Card.Text>
@@ -51,7 +51,7 @@ function Home() {
           <Col md={{ span: 1, offset: 2 }}>
           <Card style={{ width: '18rem'}} onClick={() => navigate('/sources')}>
             <Card.Body>
-              <Card.Title>Sources</Card.Title>
+              <Card.Title>Sources ({state.user.sources.length})</Card.Title>
               <Card.Text>
                 View Sources
               </Card.Text>
@@ -61,7 +61,7 @@ function Home() {
           <Col md={{ span: 0, offset: 4 }} onClick={() => navigate('/sources/new')}>
           <Card style={{ width: '18rem'}}>
             <Card.Body>
-              <Card.Title>Create Source</Card.Title>
+              <Card.Title>Create Source +</Card.Title>
               <Card.Text>
                 Add Source
               </Card.Text>
