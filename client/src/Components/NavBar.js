@@ -34,16 +34,16 @@ function NavBar() {
           <Nav.Link href='/'>Home</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey='recipes'>Recipes</Nav.Link>
+          <Nav.Link href='#recipes'>Recipes</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey='recipes/new'>New Recipe</Nav.Link>
+          <Nav.Link href='#recipes/new'>New Recipe</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey='sources'>Sources</Nav.Link>
+          <Nav.Link href='#sources'>Sources</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey='sources/new'>New Source</Nav.Link>
+          <Nav.Link href='#sources/new'>New Source</Nav.Link>
         </Nav.Item>
       </Nav>
     {buttonToggle}
