@@ -1,24 +1,21 @@
-import React from "react"
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
+import React from 'react'
+import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
+import { NavLink } from 'react-router-dom'
 
 function NavBarOut({ setLogin }) {
 
-  const handleLoginForm = () => {
-    setLogin(true)
-  }
-
     const nav =
-      <Navbar className='justify-content-center' bg='dark' variant='dark'>
-        <Nav fill variant='tabs'>
-          <Nav.Item>
-            <Nav.Link href='/login'>Login</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link onClick={handleLoginForm}>Create Account</Nav.Link>
-          </Nav.Item>
-        </Nav>
-      </Navbar>
+        <div style={{ background: 'black'}}>
+        <Col>
+          <NavLink to='/login'>
+            <Button variant='dark' onClick={() => {setLogin(false)}}>Login</Button>
+          </NavLink>
+          <NavLink to='/login'>
+            <Button variant='dark' onClick={() => {setLogin(true)}}>Create Account</Button>
+          </NavLink>
+          </Col>
+      </div>
 
   return (
     <div>

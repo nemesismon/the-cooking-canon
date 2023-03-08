@@ -71,8 +71,8 @@ function Login({ login, setLogin }) {
                 <Form.Control type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}/>
               </FloatingLabel>
               <br></br>
-              <Button variant='primary' onClick={handleFormToggle}>Create Account</Button> &ensp;
-              <Button variant='primary' type='submit'>Submit</Button>
+              <Button variant='dark' onClick={handleFormToggle}>Create Account</Button> &ensp;
+              <Button variant='dark' type='submit'>Submit</Button>
             </Form.Group>
             </Form>
             <br></br>
@@ -119,8 +119,8 @@ function Login({ login, setLogin }) {
                 <Form.Control type='date' value={birthday} onChange={e => setBirthday(e.target.value)} />
               </FloatingLabel>
               <br></br>
-              <Button variant='primary' onClick={handleFormToggle}>Login</Button> &ensp;
-              <Button variant='primary' type='submit'>Submit</Button>
+              <Button variant='dark' onClick={handleFormToggle}>Login</Button> &ensp;
+              <Button variant='dark' type='submit'>Submit</Button>
             </Form.Group>
             </Form>
             <br></br>

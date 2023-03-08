@@ -35,7 +35,7 @@ function Recipes({ setDetailRecipeID }) {
                   Good For: {recipe.good_for}; &ensp; Diet: {recipe.diet_type}
                 </Card.Text>
               </Card.Body>
-              <Button variant='primary' onClick={() => handleRecipeDelete(recipe)}>Delete</Button>
+              <Button variant='dark' onClick={() => handleRecipeDelete(recipe)}>Delete</Button>
             </Card>
             <br></br>
           </div>

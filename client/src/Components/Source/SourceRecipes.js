@@ -43,7 +43,7 @@ function SourceRecipes({ setDetailRecipeID }) {
       <h3>{currentSource.author}'s Recipes</h3>
         <br></br>
         {recipeLister()}
-        <Button onClick={() => (navigate('/sources'))}>Back</Button>
+        <Button variant='dark' onClick={() => (navigate('/sources'))}>Back</Button>
     </div>
   )
 }

@@ -237,8 +237,8 @@ function RecipeDetails({ detailRecipeID }) {
                 </Col>
               </Row>
               <br></br>
-              <Button onClick={recipeDetailsBack}>Back to Details</Button> &ensp;
-              <Button type='submit'>Update</Button>
+              <Button variant='dark' onClick={recipeDetailsBack}>Back to Details</Button> &ensp;
+              <Button variant='dark' type='submit'>Update</Button>
             </Form.Group>
           </Form>
           <br></br>
@@ -273,10 +273,10 @@ function RecipeDetails({ detailRecipeID }) {
               </Row>
             </Card.Text>
           </Card.Body>
-          <Card.Footer><Button onClick={() => setEditToggle(true)}>Edit</Button></Card.Footer>
+          <Card.Footer><Button variant='dark' onClick={() => setEditToggle(true)}>Edit</Button></Card.Footer>
         </Card>
         <br></br>
-          <Button onClick={handleGoBack}>Back</Button>
+          <Button variant='dark' onClick={handleGoBack}>Back</Button>
         </div>
         }})
       } else {

@@ -59,7 +59,8 @@ function NewSource() {
           <Form.Control type='date' placeholder='Birthday' value={birthday} onChange={e => setBirthday(e.target.value)}/>
         </FloatingLabel>
         <br></br>
-        <Button type='submit'>Submit</Button>
+        <Button variant='dark' onClick={() => navigate('/sources')}>Sources</Button>
+        &ensp;<Button variant='dark' type='submit'>Submit</Button>
       </Form.Group>
       </Form>
       <br></br>

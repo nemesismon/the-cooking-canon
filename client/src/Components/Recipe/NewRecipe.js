@@ -71,7 +71,7 @@ function NewRecipe() {
 
     return (
       <Form.Select aria-label='Unit select' onChange={e => setUnit(e.target.value)}>
-        <option>Select Source</option>
+        <option defaultValue=''> Select Source</option>
         {currentUnit}
       </Form.Select>
     )
@@ -101,7 +101,7 @@ function NewRecipe() {
             </FloatingLabel>
           </Col>
           <br></br>
-          <Button onClick={() => handleAddIngredient()}>Add Ingredient</Button>
+          <Button variant='dark' onClick={() => handleAddIngredient()}>Add Ingredient</Button>
         </Row>
         </Form.Group>
         </Container>
@@ -119,7 +119,7 @@ function NewRecipe() {
       ingredients.length > 0 ? 
       ingredients.map(ingredient => { 
         return (
-          <li align='left' key={ingredient.id}>&ensp; &ensp; &ensp; {ingredient.amount} {ingredient.unit} {ingredient.name} {ingredient.preparation}</li>
+          <>&ensp;&ensp;&ensp;<li align='left' key={ingredient.id}>{ingredient.amount} {ingredient.unit} {ingredient.name} {ingredient.preparation}</li></>
         )}) : null
 
     const errDisplay = JSON.stringify(errors) !== '[]' ? <p className='make_red'>{
@@ -168,7 +168,8 @@ function NewRecipe() {
               <Form.Control type='text' placeholder='Notes' value={notes} onChange={e => setNotes(e.target.value)} />
             </FloatingLabel>
             <br></br>
-            <Button type='submit'>Submit</Button>
+            <Button variant='dark' onClick={() => navigate('/recipes')}>Recipes</Button>
+            &ensp;<Button variant='dark' type='submit'>Submit</Button>
           </Form.Group>
         </Form>
         <br></br>
@@ -178,7 +179,7 @@ function NewRecipe() {
     <div>
       <br></br>
     <h3>New Recipe</h3>
-      <button variant='secondary' onClick={() => navigate('/sources/new')}>Need a new Source? - Click here!</button>
+      <button variant='dark' onClick={() => navigate('/sources/new')}>Need a new Source? - Click here!</button>
       <br></br>
       {recipeForm}
     </div>)
