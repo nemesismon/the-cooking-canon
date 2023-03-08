@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 function Sources() {
 
   const sources = useSelector(state => state.user.user.sources)
-  // const state = useSelector(state => state)
   const navigate = useNavigate()
 
   const handleSourceDetails = (source) => {
@@ -19,7 +18,6 @@ function Sources() {
       return (
         <div key={source.id}>
             <Card className='mx-auto' style={{ width: '75rem' }} onClick={() => handleSourceDetails(source)}>
-            {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
             <Card.Body className='hover-effect'>
               <Card.Title>{source.author}</Card.Title>
               <Card.Text>

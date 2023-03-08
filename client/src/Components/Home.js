@@ -10,13 +10,8 @@ import '../index.css'
 function Home() {
  
   const state = useSelector(state => state.user)
-  const errors = useSelector(state => state.user.errors)
   const loginStatus = useSelector(state => state.user.loginStatus)
   const navigate = useNavigate()
-
-  // console.log(state.user)
-  // console.log(errors)
-  // console.log(loginStatus)
   
   const homeMenu = 
     loginStatus ?

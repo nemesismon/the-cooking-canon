@@ -29,7 +29,6 @@ function Recipes({ setDetailRecipeID }) {
         return (
           <div>
               <Card key={recipe.id} className='mx-auto' style={{ width: '75rem' }}>
-              {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
               <Card.Body className='hover-effect' onClick={() => recipeDetails(recipe)}>
                 <Card.Title>{recipe.name}</Card.Title>
                 <Card.Text>

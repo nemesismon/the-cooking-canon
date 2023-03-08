@@ -29,7 +29,6 @@ function NewRecipe() {
   const [sourceData, setSourceData] = useState([])
 
   const dispatch = useDispatch()
-  // const user = useSelector(state => state.user.user)
   const errors = useSelector(state => state.user.errors)
   const loginStatus = useSelector(state => state.user.loginStatus)
   const navigate = useNavigate()
@@ -157,10 +156,6 @@ function NewRecipe() {
               <Form.Control type='text' placeholder='Good For' value={good_for} onChange={e => setGoodFor(e.target.value)} />
             </FloatingLabel>
             <br></br>
-            {/* <FloatingLabel label='Image'>
-              <Form.Control type='img' placeholder='Image' value={image} onChange={e => setImage(e.target.value)} />
-            </FloatingLabel>
-            <br></br> */}
             <FloatingLabel label='Instructions'>
               <Form.Control type='text' placeholder='Instructions' value={instructions} onChange={e => setInstructions(e.target.value)} />
             </FloatingLabel>
