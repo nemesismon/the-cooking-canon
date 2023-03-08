@@ -73,7 +73,11 @@ function Home() {
           <br></br>
           <br></br>
           <br></br>
-      </div> : navigate('/login')
+      </div> : 
+      <>
+      <br></br>
+      <h5>Let's Make Something Explosive!</h5>
+      </>      
 
   return (
     <div>
