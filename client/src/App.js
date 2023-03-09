@@ -44,8 +44,8 @@ function App() {
             <Route path='/recipes' element={<Recipes setDetailRecipeID={setDetailRecipeID}/>} />
             <Route path='/sources' element={<Sources />} />
             <Route path='/sources/new' element={<NewSource />} />
-            <Route path='/source_recipes' element={<SourceRecipes setDetailRecipeID={setDetailRecipeID}/>} />
-            <Route path='/recipe_details' element={<RecipeDetails detailRecipeID={detailRecipeID}/>} />
+            <Route path='/sources/:id' element={<SourceRecipes setDetailRecipeID={setDetailRecipeID}/>} />
+            <Route path='/recipes/:id' element={<RecipeDetails detailRecipeID={detailRecipeID}/>} />
             <Route path='/' element={<Home />} />
           </Routes>
       </div>

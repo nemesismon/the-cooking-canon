@@ -15,7 +15,7 @@ function Recipes({ setDetailRecipeID }) {
 
   const recipeDetails = (recipe) => {
     setDetailRecipeID(recipe.id)
-    navigate('/recipe_details')
+    navigate(`/recipes/${recipe.id}`)
   }
 
   const handleRecipeDelete = (recipe) => {

@@ -84,7 +84,6 @@ export const updateRecipe = createAsyncThunk(
       if (!response.ok){
         throw new Error(data.errors)
       }
-      // debugger
       return data
     }
 )

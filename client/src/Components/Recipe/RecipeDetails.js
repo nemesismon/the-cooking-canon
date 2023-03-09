@@ -66,12 +66,17 @@ function RecipeDetails({ detailRecipeID }) {
         console.log(err)
   }}
 
-  const sourceSelector = () => {
+  const sourceSelector = (recipe) => {
       const currentSources = sourceData.map(source => 
-        <option key={source.author} value={source.id}>{source.author}</option>)
+      {if (source.id === recipe.source_id) {
+          return <option key={source.author} value={source.id} selected>{source.author}</option>
+        } else {
+        return <option key={source.author} value={source.id}>{source.author}</option>}
+      })
+
+
     return (
       <Form.Select onChange={e => setSourceID(e.target.value)}>
-        <option>Select Source</option>
         {currentSources}
       </Form.Select>
     )
@@ -160,7 +165,7 @@ function RecipeDetails({ detailRecipeID }) {
               <br></br>
               <Row>
                 <Col md={{ span: 1, offset: 1 }} align='left'>Source: </Col>
-                <Col md={{ span: 8, offset: 0 }}>{sourceSelector()}</Col>
+                <Col md={{ span: 8, offset: 0 }}>{sourceSelector(recipe)}</Col>
               </Row>
               <br></br>
               <Row>

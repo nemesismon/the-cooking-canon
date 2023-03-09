@@ -162,6 +162,7 @@ function NewRecipe() {
             <br></br>
             <p align='left'><b>&ensp; Ingredients:</b></p>
             {activeIngredients}
+            <br></br>
             {ingredientRow()}
             <br></br>
             <FloatingLabel label='Notes'>

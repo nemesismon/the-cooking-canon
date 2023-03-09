@@ -5,11 +5,12 @@ import { useNavigate } from "react-router-dom";
 
 function Sources() {
 
-  const sources = useSelector(state => state.user.user.sources)
+  let sources = useSelector(state => state.user.user.sources)
   const navigate = useNavigate()
 
   const handleSourceDetails = (source) => {
-    navigate('/source_recipes', {state:{source}})
+    navigate(`/sources/${source.id}`, {state:{source}})
+    sources = []
   }
 
   const sourceLister =
