@@ -56,14 +56,12 @@ function RecipeDetails({ detailRecipeID }) {
     const id = detailRecipeID
     try {
       const recipeUpdate = await dispatch(updateRecipe({id, name, meal_course, cook_vessel, diet_type, good_for, image, instructions, ingredients, notes, source_id})).unwrap()
-      console.log(recipeUpdate)
       if (recipeUpdate.length > 0) {
         setName(''); setMealCourse(''); setCookVessel(''); setDietType(''); setGoodFor(''); setImage(''); setInstructions(''); setIngredients([]); setNotes(''); setSourceID();
         setEditToggle(false)
       }
     } 
     catch(err) {
-        console.log(err)
   }}
 
   const sourceSelector = (recipe) => {

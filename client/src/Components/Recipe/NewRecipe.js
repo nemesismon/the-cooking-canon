@@ -43,14 +43,12 @@ function NewRecipe() {
       e.preventDefault()
       try {
         const recipe = await dispatch(createRecipe({name, meal_course, cook_vessel, diet_type, good_for, image, instructions, ingredients, notes, source_id})).unwrap()
-        console.log(recipe)
         if (recipe.id > 0) {
           setName(''); setMealCourse(''); setCookVessel(''); setDietType(''); setGoodFor(''); setImage(''); setInstructions(''); setIngredients(''); setNotes(''); setSourceID();
           navigate('/recipes')
         }
       } 
       catch(err) {
-          console.log(err)
     }}
 
     const sourceSelector = () => {
